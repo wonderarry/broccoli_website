@@ -31,7 +31,7 @@ const submitTeam = async (team) => {
             values:[
                 team.members.reduce((acc, cur) => {
                     return acc.concat([ cur.osuId, cur.discordId ]); 
-                }, [team.captainIndex])
+                }, [team.teamName, team.captainIndex])
             ]
         }
     });
@@ -66,7 +66,7 @@ export const registerAgent = async (req, res) => {
 
 export const registerTeam = async(req, res) => {
     try{
-        const { members, captainIndex } = req.body;
+        const { members, captainIndex, teamName } = req.body;
 
         if (!Array.isArray(members) || members.length < 3 || members.length > 6){
             return res.status(400).json({ error: "Invalid team composition. A team must have 3 to 6 members."});
@@ -75,6 +75,7 @@ export const registerTeam = async(req, res) => {
         const newTeam = new TeamSubmission ({
             members: members,
             captainIndex: captainIndex,
+            teamName: teamName
         })
         //sadly i can't come up with a decent way of detecting duplicates here
         const mongoPromise = newTeam.save();

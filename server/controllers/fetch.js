@@ -76,16 +76,16 @@ export const fetchCurrentTeams = async () => {
     //here we're hopping over odd rows due to the expected formatting of the sheet
     for (let i = 0; i < requestData.length; i += 2) {
         const currentRow = requestData[i];
-        //same thing - only even rows contain names (supposedly)
-        const filteredRow = currentRow.filter((element, index, array) => {
-            return i % 2 == 0;
-        })
 
-        const captainName = filteredRow[0];
-        const memberNames = filteredRow.slice(2, filteredRow.length).filter((v, i) => {
+        const teamName = currentRow[0];
+        const captainName = currentRow[1];
+
+        // only even rows contain names (supposedly)
+        const memberNames = currentRow.slice(3, currentRow.length).filter((v, i) => {
             return i % 2 == 0;
         })
-        // console.log(memberNames);
+        
+        console.log(memberNames);
         const captainIndex = memberNames.findIndex((item) => {
             return item == captainName;
         })
@@ -104,7 +104,8 @@ export const fetchCurrentTeams = async () => {
                     rankWithBWS: matchingPlayer.rankWithBWS
                 }
             })),
-            captainIndex: captainIndex
+            captainIndex: captainIndex,
+            teamName: teamName
         })
         const requiredPadding = 6 - newTeam.members.length;
         for (let i = 0; i < requiredPadding; i += 1){

@@ -54,6 +54,10 @@ const TeamSchema = new mongoose.Schema ({
         type: Number,
         required: true,
         unique: false
+    },
+    teamName: {
+        type: String,
+        required: true,
     }
 }, {timestamps: true});
 
