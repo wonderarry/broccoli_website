@@ -19,3 +19,6 @@ Broccoli Cup 3 is crafted from scratch using the latest technologies:
 - **Express.js and Node.js**: Powering the back-end infrastructure, ensuring seamless performance and real-time updates.
 - **React.js**: Creating an engaging front-end user interface that is both visually appealing and highly functional.
 - **MongoDB**: Storing player profiles, tournament data, and match results securely and efficiently.
+
+
+<small>If you find the description hilarious, that's because it's AI generated - though the project indeed runs on MERN stack.</small>
