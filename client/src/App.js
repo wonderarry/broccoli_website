@@ -10,28 +10,30 @@ import MappoolPage from 'scenes/mappoolPage';
 
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import { CssBaseline } from '@mui/material';
-
-
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme } from "@mui/material/styles";
+import { themeSettings } from 'theme';
 
 function App() {
   const mode = useSelector((state) => state.mode);
-
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (
     <div className="app">
       <BrowserRouter>
-        
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/agents" element={<AgentsPage />} />
-          <Route path="/teams" element={<TeamsPage />} />
-          <Route path="/register/agent" element={<RegisterAgentPage />} />
-          <Route path="/register/team" element={<RegisterTeamPage />} />
-          <Route path="/bracket" element={<BracketPage />} />
-          <Route path="/rules" element={<RulesPage />} />
-          <Route path="/mappool" element={<MappoolPage />} />
-        </Routes>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/agents" element={<AgentsPage />} />
+            <Route path="/teams" element={<TeamsPage />} />
+            <Route path="/register/agent" element={<RegisterAgentPage />} />
+            <Route path="/register/team" element={<RegisterTeamPage />} />
+            <Route path="/bracket" element={<BracketPage />} />
+            <Route path="/rules" element={<RulesPage />} />
+            <Route path="/mappool" element={<MappoolPage />} />
+          </Routes>
+        </ThemeProvider>
       </BrowserRouter>
     </div>
   );
