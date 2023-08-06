@@ -263,7 +263,8 @@ const Navbar = () => {
                         width: '100%',
                         backgroundColor: lightGrey,
                         paddingTop: '5%',
-                        paddingBottom: '8%'
+                        paddingBottom: '8%',
+                        zIndex: 20,
                     }}
                 >
                     <CustomMobileMenuButton toWhere='/teams'>Teams</CustomMobileMenuButton>
