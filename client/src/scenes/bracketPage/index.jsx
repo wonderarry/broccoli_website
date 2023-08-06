@@ -1,8 +1,14 @@
 import React from 'react'
+import Navbar from 'scenes/widgets/navbar';
+import { Box } from '@mui/material';
+
 
 const BracketPage = () => {
   return (
-    <div>BracketPage</div>
+    <Box>
+      <Navbar />
+      <div>bracket</div>
+    </Box>
   )
 }
 

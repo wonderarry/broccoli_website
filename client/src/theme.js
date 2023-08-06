@@ -5,6 +5,7 @@ export const colorTokens = {
         0: "#FFFFFF",
         10: "#F6F6F6",
         50: "#F0F0F0",
+        75: "#E8E8E8",
         100: "#E0E0E0",
         200: "#C2C2C2",
         300: "#A3A3A3",
@@ -24,7 +25,7 @@ export const colorTokens = {
         400: "#32fa32",
         500: "#00fa00",
         600: "#00bd00",
-        700: "#007d00",
+        700: "#009900",
         800: "#004000",
         900: "#001a00"
     }
@@ -38,37 +39,41 @@ export const themeSettings = (mode) => {
                 /* DARK MODE COLORS */
                 primary: {
                     dark: colorTokens.primary[200],
-                    main: colorTokens.primary[500],
-                    light: colorTokens.primary[800]
+                    main: colorTokens.primary[400],
+                    light: colorTokens.primary[600]
                 },
                 neutral: {
-                    dark: colorTokens.grey[100],
-                    main: colorTokens.grey[200],
-                    mediumMain: colorTokens.grey[300],
+                    dark: colorTokens.grey[50],
+                    almostDark: colorTokens.grey[100],
+                    darkMain: colorTokens.grey[200],
+                    main: colorTokens.grey[300],
                     medium: colorTokens.grey[400],
-                    light: colorTokens.grey[700]
+                    light: colorTokens.grey[700],
+                    veryLight: colorTokens.grey[800]
                 },
                 background: {
                     default: colorTokens.grey[900],
-                    alt: colorTokens.grey[800]
+                    alt: colorTokens.grey[700]
                 }
             } : {
                 /* LIGHT MODE COLORS */
                 primary: {
                     dark: colorTokens.primary[700],
-                    main: colorTokens.primary[500],
-                    light: colorTokens.primary[50]
+                    main: colorTokens.primary[700],
+                    light: colorTokens.primary[400]
                 },
                 neutral: {
-                    dark: colorTokens.grey[700],
+                    dark: colorTokens.grey[800],
+                    almostDark: colorTokens.grey[700],
+                    darkMain: colorTokens.grey[600],
                     main: colorTokens.grey[500],
-                    mediumMain: colorTokens.grey[400],
-                    medium: colorTokens.grey[300],
-                    light: colorTokens.grey[50]
+                    medium: colorTokens.grey[200],
+                    light: colorTokens.grey[75],
+                    veryLight: colorTokens.grey[50]
                 },
                 background: {
                     default: colorTokens.grey[10],
-                    alt: colorTokens.grey[0]
+                    alt: colorTokens.grey[100]
                 }
             })
         },
@@ -77,7 +82,7 @@ export const themeSettings = (mode) => {
             fontSize: 12,
             h1: {
                 fontFamily: ["Inter", "Helvetica"].join(","),
-                fontSize: 40,
+                fontSize: 48,
             },
             h2: {
                 fontFamily: ["Inter", "Helvetica"].join(","),

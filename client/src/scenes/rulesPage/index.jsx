@@ -1,8 +1,13 @@
 import React from 'react'
+import Navbar from 'scenes/widgets/navbar';
+import { Box } from '@mui/material';
 
 const RulesPage = () => {
   return (
-    <div>RulesPage</div>
+   <Box>
+      <Navbar />
+      <div>rules</div>
+    </Box>
   )
 }
 
