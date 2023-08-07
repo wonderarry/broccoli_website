@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 import MainButton from 'components/MainButton';
 import TextButton from 'components/TextButton';
 import MappoolEntry from 'components/MappoolEntry';
+import TextInput from 'components/TextInput';
+import TickboxOption from 'components/TickboxOption';
 
 const HomePage = () => {
   return (
@@ -20,6 +22,13 @@ const HomePage = () => {
         mapsetId="292301"
         mapId="657917"
       />
+      <TextInput
+        title="Enter your osu! ID"
+        placeholder="osu! ID"
+        validationType="osu"
+
+      />
+      <TickboxOption onClickAction={() => console.log("tickbox triggered")}>Agree to the terms of the Tournament</TickboxOption>
     </Box>
   )
 }

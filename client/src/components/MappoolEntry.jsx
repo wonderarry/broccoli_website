@@ -97,7 +97,7 @@ const MappoolEntry = ({ mapper, songName, songAuthor, mapType, mapsetId, mapId }
                             cursor: 'pointer'
                         }
                     }}>
-                    <FileDownloadSharp fontSize="large" />
+                    <FileDownloadSharp fontSize="large" sx={{color: '#F0F0F0'}} />
                 </Box>
                 <Box
                     sx={{

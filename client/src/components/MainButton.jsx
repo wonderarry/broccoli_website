@@ -19,6 +19,7 @@ const MainButton = ({ children, isWhite=true, onClickAction }) => {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 display: 'inline-block',
+                transition: 'background-color 0.4s',
                 backgroundColor: bgColor,
                 '&:hover': {
                     backgroundColor: bgColorAlt
