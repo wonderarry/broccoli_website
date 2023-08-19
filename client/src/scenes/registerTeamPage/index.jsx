@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Navbar from 'scenes/widgets/navbar';
 import { Box, Typography, useTheme } from '@mui/material';
 import TextInput from 'components/TextInput';
@@ -6,6 +6,13 @@ import { useMediaQuery } from '@mui/material';
 import TickboxOption from 'components/TickboxOption';
 import MainButton from 'components/MainButton';
 import RegisteringTeamMember from 'components/RegisteringTeamMember';
+import { AddBoxOutlined } from '@mui/icons-material';
+import { render } from '@testing-library/react';
+import Footer from 'scenes/widgets/footer';
+import PageWrapBox from 'components/PageWrapBox';
+
+
+
 
 const RegisterTeamPage = () => {
 
@@ -13,19 +20,22 @@ const RegisterTeamPage = () => {
     const darkFont = theme.palette.neutral.dark;
     const altFont = theme.palette.neutral.light;
 
-    const [incrementId, setIncrementId] = useState(0);
+    const bgColor = theme.palette.neutral.light;
+    const bgColorAlt = theme.palette.neutral.medium;
+    const textColor = theme.palette.neutral.dark;
+    const lightGrey = theme.palette.neutral.veryLight;
+
+
+
+
+    const [isPresetMembersAdded, setIsPresetMembersAdded] = useState(false);
 
     const [formData, setFormData] = useState({
-        captain: {
-            discordId: '',
-            osuId: ''
-        },
-        members: {0: {
-            discordId: '',
-            osuId: ''
-        }} //top to bottom representation of user input on members
+        discordId: '',
+        osuId: ''
     })
 
+    const [renderedList, setRenderedList] = useState([])
 
     const handleFormChange = (targetName) => (newText) => {
         setFormData({
@@ -36,118 +46,178 @@ const RegisterTeamPage = () => {
     }
 
     const handleMemberOsuIdChange = (targetIndex, newText) => {
-        setFormData({
-            ...formData,
-            members: {
-                ...formData['members'],
-                [targetIndex]: { 
-                    osuId: newText,
-                    discordId: formData['members'][targetIndex]['discordId']
+        setRenderedList(
+            renderedList.map((item) => {
+                if (item.id != targetIndex) {
+                    return item;
                 }
-            }
-        })
-        
+                return { ...item, osuId: newText };
+            })
+        )
     }
 
     const handleMemberDiscordIdChange = (targetIndex, newText) => {
-        setFormData({
-            ...formData,
-            members: {
-                ...formData['members'],
-                [targetIndex]: {
-                    osuId: formData['members'][targetIndex]['osuId'],
-                    discordId: newText
+        setRenderedList(
+            renderedList.map((item) => {
+                if (item.id != targetIndex) {
+                    return item;
                 }
-            }
-        })
-        
+                return { ...item, discordId: newText };
+            })
+        )
     }
 
     const handleAddMember = () => {
-        const userId = incrementId;
-        setIncrementId(incrementId + 1);
-
-        setFormData({
-            ...formData,
-            members: {
-                ...formData.members,
-                [userId]: {
-                    discordId: '',
-                    osuId: ''
-                }
+        const userId = crypto.randomUUID();
+        const oldLength = renderedList.length;
+        console.log('id to be used here: ', userId)
+        setRenderedList([
+            ...renderedList,
+            {
+                id: userId,
+                discordId: '',
+                osuId: '',
+                enumval: oldLength + 1
             }
-        })
-        //need to actually create a new element - maybe it's tbd through map function in jsx
+        ])
     }
 
     const handleRemoveMember = (targetIndex) => {
-        if (true){
-            return
-        }
-        const updatedMembers = {...formData.members};
-        delete updatedMembers[targetIndex];
-        setFormData({
-            ...formData,
-            members: updatedMembers
+        console.log(targetIndex)
+        const listWithExcludedMember = renderedList.filter((item) => {
+            return targetIndex != item.id;
         })
+        const listWithReorderedEnumeration = listWithExcludedMember.map((item, index) => {
+            return { ...item, enumval: index + 1 };
+        })
+        console.log(listWithReorderedEnumeration)
+        setRenderedList(listWithReorderedEnumeration)
     }
 
     const handleSubmitForm = () => {
 
     }
     //yet to implement - menu for adding players and specific textinput for this interface
-    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+    const isNonMobileScreens = useMediaQuery("(min-width: 750px)");
+
+    useLayoutEffect(() => {
+        if (!isPresetMembersAdded) {
+            if (renderedList.length < 2) {
+                handleAddMember();
+            }
+            else {
+                setIsPresetMembersAdded(true);
+            }
+        }
+    }, [renderedList]);
+
+
     return (
-        <Box>
-            <Navbar />
-            <div>registerTeam</div>
+        <PageWrapBox>
+            <Box>
+                <Navbar />
+                <div>registerTeam</div>
 
-            <Box
-                marginLeft='6%'
-                display='flex'
-                flexDirection="column"
-                width="min(90%, 600px)"
-                alignItems="flex-start"
-            >
-                <Typography
-                    variant='h1'
-                    sx={{
-                        paddingTop: '10%',
-                        paddingBottom: '3rem'
-                    }}
+                <Box
+                    marginLeft='6%'
+                    display='flex'
+                    flexDirection="column"
+                    width={isNonMobileScreens ? "660px" : '88vw'}
+                    alignItems="flex-start"
                 >
-                    Register as a team captain
-                </Typography>
-                <TextInput
-                    title="Your osu! ID"
-                    placeholder="12345678"
-                    validationType="osuId"
-                    initialValue=""
-                    onChangeAction={handleFormChange('osuId')}
-                />
-                <TextInput
-                    title="Your Discord"
-                    placeholder="@user"
-                    validationType="discordId"
-                    initialValue=""
-                    onChangeAction={handleFormChange('discordId')}
-                />
+                    <Typography
+                        variant='h1'
+                        sx={{
+                            paddingTop: '10%',
+                            paddingBottom: '3rem'
+                        }}
+                    >
+                        Register as a team captain
+                    </Typography>
+                    <TextInput
+                        title="Your osu! ID"
+                        placeholder="12345678"
+                        validationType="osuId"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleFormChange('osuId')}
+                    />
+                    <TextInput
+                        title="Your Discord"
+                        placeholder="@user"
+                        validationType="discordId"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleFormChange('discordId')}
+                    />
+                    {renderedList.map((item) => {
+                        return (
+                            <Box
+                                display='flex'
+                                flexDirection='row'
+                                key={item.id}
+                                sx={{
 
-                <MainButton
-                    onClickAction={handleSubmitForm}
-                    sx={{
-                    }}
-                >
-                    Register
-                </MainButton>
-                <RegisteringTeamMember
-                    playerIndex={0}
-                    onChangeOsuId={handleMemberOsuIdChange}
-                    onChangeDiscordId={handleMemberDiscordIdChange}
-                    onDeletePlayer={handleRemoveMember}
-                />
+                                    alignItems: 'center',
+                                }}
+                            >
+
+                                <RegisteringTeamMember
+                                    playerIndex={item.id}
+                                    onChangeOsuId={handleMemberOsuIdChange}
+                                    onChangeDiscordId={handleMemberDiscordIdChange}
+                                    onDeletePlayer={handleRemoveMember}
+                                    enumval={item.enumval}
+                                />
+                            </Box>)
+                    }
+                    )}
+
+
+                    <Box
+                        display='flex'
+                        flexDirection='row'
+                        onClick={handleAddMember}
+                        sx={{
+                            padding: '0.7rem 1.2rem',
+                            borderRadius: '6px',
+                            width: isNonMobileScreens ? 'auto' : '88vw',
+                            justifyContent: 'center',
+                            border: '1px solid',
+                            borderColor: theme.palette.neutral.medium,
+                            transition: 'border-color 0.3s ease, background-color 0.3s ease',
+                            alignItems: 'center',
+                            marginBottom: '1.5rem',
+                            userSelect: 'none',
+                            '&:hover': {
+                                backgroundColor: theme.palette.neutral.veryLight,
+                                borderColor: theme.palette.neutral.darkMain,
+                            },
+                            '&:active': {
+                                backgroundColor: theme.palette.neutral.medium
+                            }
+                        }}
+                    >
+                        <AddBoxOutlined fontSize="medium" sx={{ color: 'black' }} />
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                paddingLeft: "0.5rem",
+                                paddingRight: '0.15rem',
+                                fontWeight: '600'
+                            }}
+                        >Add player</Typography>
+                    </Box>
+                    <MainButton
+                        onClickAction={handleSubmitForm}
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                    >
+                        Register
+                    </MainButton>
+                </Box>
             </Box>
-        </Box>
+            <Footer />
+        </PageWrapBox>
     )
 }
 

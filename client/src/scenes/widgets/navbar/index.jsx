@@ -247,13 +247,13 @@ const Navbar = () => {
                 {/* MOBILE NAVIGATION */}
                 {!isNonMobileScreens && (
                     <FlexBetween gap="25px">
-                        <IconButton onClick={() => dispatch(setMode())}>
+                        {false && (<IconButton onClick={() => dispatch(setMode())}>
                             {theme.palette.mode === "dark" ? (
                                 <DarkMode sx={{ fontSize: "25px" }} />
                             ) : (
                                 <LightMode sx={{ color: neutralDark, fontSize: "25px" }} />
                             )}
-                        </IconButton>
+                        </IconButton>)}
                         <IconButton onClick={() => setIsMobileMenu(!isMobileMenuToggled)}>
                             {!isMobileMenuToggled ? (
                                 <Menu sx={{ fontSize: "25px" }} />

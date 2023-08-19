@@ -50,7 +50,7 @@ const TextButton = ({children, onClickAction}) => {
                 sx={{
                     color: textColor,
                     fontWeight: 500,
-                    
+                    userSelect: 'none'
                 }}
             >
                 {children}

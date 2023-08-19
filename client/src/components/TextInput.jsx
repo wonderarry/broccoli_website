@@ -11,7 +11,7 @@ import hexToRgba from "ulility/hexToRgba";
 
 
 
-const TextInput = ({ title, placeholder, validationType, initialValue, onChangeAction }) => {
+const TextInput = ({ title, placeholder, validationType, initialValue, onChangeAction, overrideWidth=null }) => {
     // validationType denotes whether data is discordId or osuId
     const theme = useTheme();
     const [value, setValue] = useState(initialValue);
@@ -55,11 +55,35 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
     }
 
 
+    let inputStyles = {
+        fontSize: theme.typography.h4.fontSize,
+        '& input': {
+            borderBottom: '2px solid',
+            borderColor: hexToRgba(titleColor, 0.7),
+            paddingBottom: '3px',
+            transition: 'border-color 0.3s, color 0.6s, padding-bottom 0.2s, opacity 0.4s, padding-left 0.2s',
+            opacity: 0.4,
+            '&:not(:placeholder-shown)': {
+                opacity: 1,
+            },
+            '&:focus': {
+                paddingBottom: '6px',
+                paddingLeft: '4px',
+                borderColor: hexToRgba(titleColor, 1),
+            }
+        }
+    }
+
+    if (overrideWidth !== null) {
+        inputStyles = {...inputStyles, width: overrideWidth}
+    }
+
     return (
         <Box
             sx={{
                 display: 'column',
-                paddingBottom: '2.5rem'
+                paddingBottom: '2.5rem',
+                
             }}
         >
             <Typography
@@ -88,24 +112,7 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
                         }
                     }
                 }
-                sx={{
-                    fontSize: theme.typography.h4.fontSize,
-                    '& input': {
-                        borderBottom: '2px solid',
-                        borderColor: hexToRgba(titleColor, 0.7),
-                        paddingBottom: '3px',
-                        transition: 'border-color 0.3s, color 0.6s, padding-bottom 0.2s, opacity 0.4s, padding-left 0.2s',
-                        opacity: 0.4,
-                        '&:not(:placeholder-shown)': {
-                            opacity: 1,
-                        },
-                        '&:focus': {
-                            paddingBottom: '6px',
-                            paddingLeft: '4px',
-                            borderColor: hexToRgba(titleColor, 1),
-                        }
-                    }
-                }}
+                sx={inputStyles}
             />
         </Box>
     )

@@ -5,7 +5,8 @@ import TextInput from 'components/TextInput';
 import { useMediaQuery } from '@mui/material';
 import TickboxOption from 'components/TickboxOption';
 import MainButton from 'components/MainButton';
-
+import Footer from 'scenes/widgets/footer';
+import PageWrapBox from 'components/PageWrapBox';
 
 const RegisterAgentPage = () => {
 
@@ -29,7 +30,7 @@ const RegisterAgentPage = () => {
         reading: false
     })
 
-    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+    const isNonMobileScreens = useMediaQuery("(min-width: 750px)");
 
     const handleFormChange = (targetName) => (newText) => {
         setFormData({
@@ -57,6 +58,7 @@ const RegisterAgentPage = () => {
     }
 
     return (
+        <PageWrapBox>
         <Box>
             <Navbar />
             <div>registerAgent</div>
@@ -64,7 +66,7 @@ const RegisterAgentPage = () => {
                 marginLeft='6%'
                 display='flex'
                 flexDirection="column"
-                width="min(90%, 600px)"
+                width={isNonMobileScreens ? "660px" : '88vw'}
                 alignItems="flex-start"
             >
                 <Typography
@@ -81,6 +83,7 @@ const RegisterAgentPage = () => {
                     placeholder="12345678"
                     validationType="osuId"
                     initialValue=""
+                    overrideWidth={!isNonMobileScreens ? '88vw' : null}
                     onChangeAction={handleFormChange('osuId')}
                 />
                 <TextInput
@@ -88,6 +91,7 @@ const RegisterAgentPage = () => {
                     placeholder="@user"
                     validationType="discordId"
                     initialValue=""
+                    overrideWidth={!isNonMobileScreens ? '88vw' : null}
                     onChangeAction={handleFormChange('discordId')}
                 />
                 <Box
@@ -108,7 +112,7 @@ const RegisterAgentPage = () => {
                 <Typography
                     variant='h5'
                     sx={{
-                        display: 'inline',
+                        display: isNonMobileScreens ? 'inline' : 'block',
                         opacity: (enabledCount >= 3) ? 1 : 0.6,
                         textDecoration: 'underline',
                         color: darkFont,
@@ -173,6 +177,7 @@ const RegisterAgentPage = () => {
                 </Box>
                 <MainButton
                     onClickAction={handleSubmitForm}
+                    overrideWidth={!isNonMobileScreens ? '88vw' : null}
                     sx={{
                     }}
                 >
@@ -180,6 +185,8 @@ const RegisterAgentPage = () => {
                 </MainButton>
             </Box>
         </Box>
+        <Footer />
+        </PageWrapBox>
     )
 }
 
