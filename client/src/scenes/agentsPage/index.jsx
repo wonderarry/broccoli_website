@@ -11,5 +11,7 @@ const AgentsPage = () => {
     </Box>
   )
 }
-
+/*
+osu name, country, avatar, discord, bws rank
+*/
 export default AgentsPage

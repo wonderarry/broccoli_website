@@ -32,7 +32,7 @@ const MainButton = ({ children, isWhite=true, onClickAction }) => {
                 sx={{
                     color: textColor,
                     userSelect: 'none',
-                    padding: '1rem 2.5rem',
+                    padding: '1rem 3.5rem',
                     fontWeight: '500',
                 }}
             >

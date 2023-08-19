@@ -12,6 +12,7 @@ import {
     InputLabel,
     Icon
 } from "@mui/material";
+import hexToRgba from "ulility/hexToRgba";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "state";
@@ -75,7 +76,7 @@ const CustomMobileMenuButton = ({ children, toWhere }) => {
     )
 }
 
-const RegisterOverlay = () => {
+const RegisterOverlay = ({ isOpen }) => {
     const theme = useTheme();
     const navigate = useNavigate();
     const neutralLight = theme.palette.neutral.light;
@@ -89,15 +90,20 @@ const RegisterOverlay = () => {
             display="flex"
             justifyContent="center"
             alignItems="flex-start"
-
+            position="fixed"
+            zIndex="15"
         >
             {/* LEFT BOX - Register as a free agent */}
             <Box
                 backgroundColor={neutralDark}
                 width="50vw"
-                height="30vh"
+                overflow='hidden'
+
                 onClick={() => navigate('/register/agent')}
                 sx={{
+                    height: isOpen ? '30vh' : 0,
+                    opacity: isOpen ? 1 : 0,
+                    transition: 'height 0.3s ease, opacity 0.4s ease',
                     '&:hover': {
                         cursor: 'pointer',
                         backgroundColor: neutralAlmostDark
@@ -122,9 +128,12 @@ const RegisterOverlay = () => {
 
                 backgroundColor={neutralDarkMain}
                 width="50vw"
-                height="30vh"
+                overflow='hidden'
                 onClick={() => navigate('/register/team')}
                 sx={{
+                    height: isOpen ? '30vh' : 0,
+                    opacity: isOpen ? 1 : 0,
+                    transition: 'height 0.3s ease, opacity 0.4s ease',
                     '&:hover': {
                         cursor: 'pointer',
                         backgroundColor: neutralMain
@@ -213,7 +222,12 @@ const Navbar = () => {
                         <Typography variant="h4">
                             Register
                         </Typography>
-                        <KeyboardArrowDownSharp />
+                        <KeyboardArrowDownSharp
+                            sx={{
+                                transform: isRegisterButtonClicked ? 'rotate(-180deg)' : 'rotate(0deg)',
+                                transition: 'transform 0.3s ease',
+                            }}  
+                        />
                     </FlexBetween>
                     <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/agents">Free Agents</CustomDesktopMenuButton>
@@ -276,7 +290,11 @@ const Navbar = () => {
                     <CustomMobileMenuButton toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
                 </Box>
             )}
-            {isNonMobileScreens && isRegisterButtonClicked && <RegisterOverlay />}
+            {isNonMobileScreens && (
+                <RegisterOverlay
+                    isOpen={isRegisterButtonClicked} 
+                />
+            )}
         </Box>
     )
 }
