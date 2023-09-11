@@ -72,7 +72,7 @@ import teamsRoutes from "./routes/teams.js";
 app.use("/register", registerRoutes);
 app.use("/agents", agentsRoutes);
 app.use("/teams", teamsRoutes);
-
+console.log(process.env)
 //setup for mongoose
 const PORT = process.env.PORT || 3001; // 3001 is the backup port in case the .env value is not specified
 mongoose.connect(process.env.MONGO_URL, {
