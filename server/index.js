@@ -74,7 +74,7 @@ app.use("/agents", agentsRoutes);
 app.use("/teams", teamsRoutes);
 
 //setup for mongoose
-const PORT = process.env.PORT || 6001; // 6001 is the backup port in case the .env value is not specified
+const PORT = process.env.PORT || 3001; // 3001 is the backup port in case the .env value is not specified
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
