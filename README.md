@@ -27,3 +27,29 @@ Broccoli Cup 3 is crafted from scratch using the latest technologies:
 ## Docker Instruction
 - **With docker-compose**: **docker-compose up --build**
 - **Alternatively**: **docker build -t brocc-image .**, then **docker run -p 3000:3000 -p 3001:3001 brocc-image**
+
+## Guide on how to set up your own .env file (should be in the /server dir)
+You will need to fill in the following env variables in it:
+- **MONGO_URL** is the url through which you are connecting to the db
+- **SERVER_PORT** is the server port. I am not using the standard **PORT** name because if the client sees this env variable (which it will in case of the containerized version), both the server and the client will attempt to run on the same port.
+- **JWT_SECRET** is not required but was left with assumption that later on there will be need for authentication|authorization. 
+
+- **SPREADSHEET_ALL_USERS_ID** is the id of the spreadsheet that hosts the _api worksheet
+- **SPREADSHEET_ALL_USERS_RANGE** is the range where we expect all the _api data to be in
+
+Same goes for the following:
+- **SPREADSHEET_AGENTS_ID**
+- **SPREADSHEET_AGENTS_RANGE**
+
+- **SPREADSHEET_TEAMS_ID**
+- **SPREADSHEET_TEAMS_RANGE**
+
+- **SPREADSHEET_AGENT_SUBMISSIONS_ID**
+- **SPREADSHEET_AGENT_SUBMISSIONS_RANGE**
+
+- **SPREADSHEET_TEAM_SUBMISSIONS_ID**
+- **SPREADSHEET_TEAM_SUBMISSIONS_RANGE**
+
+You will need a service account in order to actually run this system in sync with the spreadsheet. You have to specify the following related env variables:
+- **SERVICE_ACCOUNT_CLIENT_EMAIL** is the email that could be found in the credentials file as well as on the Google Cloud Console.
+- **SERVICE_ACCOUNT_PRIVATE_KEY** - look for it in the credentials file, it's the big string that begins with **-----BEGIN PRIVATE KEY----**
