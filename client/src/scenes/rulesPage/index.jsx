@@ -3,7 +3,6 @@ import Navbar from 'scenes/widgets/navbar';
 import { Box, ListItem, Typography, List } from '@mui/material';
 import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
-import { AddSharp } from "@mui/icons-material";
 import { useState } from 'react';
 import { styled } from "@mui/system";
 

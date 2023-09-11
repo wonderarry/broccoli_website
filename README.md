@@ -22,3 +22,8 @@ Broccoli Cup 3 is crafted from scratch using the latest technologies:
 
 
 <small>If you find the description hilarious, that's because it's AI generated - though the project indeed runs on MERN stack.</small>
+
+
+## Docker Instruction
+- **With docker-compose**: **docker-compose up --build**
+- **Alternatively**: **docker build -t brocc-image .**, then **docker run -p 3000:3000 -p 3001:3001 brocc-image**

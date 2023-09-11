@@ -17,13 +17,7 @@ import axios from 'axios';
 const RegisterTeamPage = () => {
 
     const theme = useTheme();
-    const darkFont = theme.palette.neutral.dark;
-    const altFont = theme.palette.neutral.light;
-
-    const bgColor = theme.palette.neutral.light;
-    const bgColorAlt = theme.palette.neutral.medium;
-    const textColor = theme.palette.neutral.dark;
-    const lightGrey = theme.palette.neutral.veryLight;
+    
 
     const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
     const [teamName, setTeamName] = useState('');

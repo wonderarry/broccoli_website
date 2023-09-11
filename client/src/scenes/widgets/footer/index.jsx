@@ -12,7 +12,7 @@ const Footer = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-    const isSmallScreens = useMediaQuery("(max-width: 500px");
+    
     return (
         <Box
             display='flex'
