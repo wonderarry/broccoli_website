@@ -34,6 +34,19 @@ app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 // });
 // const upload = multer({ storage });
 
+
+//setup for mongoose
+const PORT = process.env.SERVER_PORT || 3001; // 3001 is the backup port in case the .env value is not specified
+await mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    app.listen(PORT, () => console.log(`Server port: ${PORT}`));
+}).catch((e) => {
+    console.log(`An error occured during connection to the database: ${e}`);
+})
+
+
 /* CRON FETCH */
 //important todo: when data is being updated, notify the frontend that data is currently updated
 import { fetchCurrentPlayers, fetchCurrentAgents, fetchCurrentTeams } from "./controllers/fetch.js";
@@ -53,7 +66,7 @@ const fetchTask = cron.schedule('0 */4 * * *', async () => {
         console.log("Fetch complete!")
     }
     catch (err){
-        console.log("Encountered error during fetching: ", err.message);
+        console.log("Encountered error during fetching: ", err);
         app.locals.isUpdating = false;
     }
 }, { runOnInit: true });
@@ -72,17 +85,6 @@ import teamsRoutes from "./routes/teams.js";
 app.use("/register", registerRoutes);
 app.use("/agents", agentsRoutes);
 app.use("/teams", teamsRoutes);
-console.log(process.env)
-//setup for mongoose
-const PORT = process.env.PORT || 3001; // 3001 is the backup port in case the .env value is not specified
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    app.listen(PORT, () => console.log(`Server port: ${PORT}`));
-}).catch((e) => {
-    console.log(`An error occured during connection to the database: ${e}`);
-})
-//end of setup for mongoose
+
 
 
