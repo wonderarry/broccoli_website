@@ -13,6 +13,7 @@ import {
     Icon
 } from "@mui/material";
 import hexToRgba from "ulility/hexToRgba";
+import broccLogo from '../../../assets/logo.svg'
 
 import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "state";
@@ -29,6 +30,7 @@ const CustomDesktopMenuButton = ({ children, toWhere }) => {
     return (
         <Typography
             variant="h4"
+            fontWeight='500'
             color={neutralDark}
             onClick={() => navigate(toWhere)}
             sx={{
@@ -110,18 +112,23 @@ const RegisterOverlay = ({ isOpen }) => {
                     }
                 }}
             >
-                <Typography
-                    variant="h1"
-                    color={neutralVeryLight}
-                    fontWeight={600}
+                <Box
                     marginTop="clamp(20px, 8%, 70px)"
                     marginLeft="clamp(20px, 8%, 100px)"
-                    sx={{
-                        userSelect: 'none'
-                    }}
+                    width='60%'
                 >
-                    Register as<br /> Free Agent
-                </Typography>
+                    <Typography
+                        variant="h0"
+                        color={neutralVeryLight}
+                        fontWeight={600}
+                        sx={{
+                            userSelect: 'none'
+                        }}
+                    >
+                        Register as a Free Agent
+                    </Typography>
+                </Box>
+
             </Box>
             {/* RIGHT BOX - Register as a team */}
             <Box
@@ -140,18 +147,22 @@ const RegisterOverlay = ({ isOpen }) => {
                     }
                 }}
             >
-                <Typography
-                    variant="h1"
-                    color={neutralVeryLight}
-                    fontWeight={600}
+                <Box
                     marginTop="clamp(20px, 8%, 70px)"
                     marginLeft="clamp(20px, 8%, 100px)"
-                    sx={{
-                        userSelect: 'none'
-                    }}
+                    width='60%'
                 >
-                    Register as<br /> Team Captain
-                </Typography>
+                    <Typography
+                        variant="h0"
+                        color={neutralVeryLight}
+                        fontWeight={600}
+                        sx={{
+                            userSelect: 'none'
+                        }}
+                    >
+                        Register as a Team Captain
+                    </Typography>
+                </Box>
             </Box>
         </Box>
     )
@@ -168,7 +179,7 @@ const Navbar = () => {
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     //const isNonMobileScreens = false;
     const theme = useTheme();
-    const lightGrey = theme.palette.neutral.light;
+    const lightGrey = theme.palette.neutral.veryLight;
     const neutralDark = theme.palette.neutral.dark;
     const background = theme.palette.neutral.default;
     const primaryLight = theme.palette.primary.light;
@@ -181,27 +192,21 @@ const Navbar = () => {
         >
             <FlexBetween
                 padding="1rem 6%"
-                backgroundColor={lightGrey}
-                borderBottom="1px solid"
-                borderColor={neutralMedium}
+
+
             >
                 <FlexBetween>
-                    <Typography
-                        fontWeight="600"
-                        fontSize="clamp(1rem, 2rem, 2.25rem)"
-                        color={primaryMain}
-                        onClick={() => navigate("/")}
+                    <Box
+                        onClick={() => navigate('/')}
                         sx={{
-                            userSelect: 'none',
-                            whiteSpace: 'nowrap',
-                            "&:hover": {
-                                color: primaryLight,
-                                cursor: "pointer",
-                            }
                         }}
                     >
-                        Broccoli Cup 3
-                    </Typography>
+                        <img 
+                            src={broccLogo}
+                            
+                        />
+
+                    </Box>
                 </FlexBetween>
                 {/* DESKTOP NAVIGATION */}
                 {/* If the device is not mobile, this gets shown */}
@@ -219,14 +224,14 @@ const Navbar = () => {
                             }
                         }}
                     >
-                        <Typography variant="h4">
+                        <Typography variant="h4" fontWeight='500'>
                             Register
                         </Typography>
                         <KeyboardArrowDownSharp
                             sx={{
                                 transform: isRegisterButtonClicked ? 'rotate(-180deg)' : 'rotate(0deg)',
                                 transition: 'transform 0.3s ease',
-                            }}  
+                            }}
                         />
                     </FlexBetween>
                     <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
@@ -234,15 +239,18 @@ const Navbar = () => {
                     <CustomDesktopMenuButton toWhere="/bracket">Bracket</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/mappool">Mappool</CustomDesktopMenuButton>
-                    <FlexBetween gap="2rem">
-                        <IconButton onClick={() => dispatch(setMode())}>
-                            {theme.palette.mode === "dark" ? (
-                                <DarkMode sx={{ fontSize: "25px" }} />
-                            ) : (
-                                <LightMode sx={{ color: neutralDark, fontSize: "25px" }} />
-                            )}
-                        </IconButton>
-                    </FlexBetween>
+                    {false &&
+                        <FlexBetween gap="2rem">
+                            <IconButton onClick={() => dispatch(setMode())}>
+                                {theme.palette.mode === "dark" ? (
+                                    <DarkMode sx={{ fontSize: "25px" }} />
+                                ) : (
+                                    <LightMode sx={{ color: neutralDark, fontSize: "25px" }} />
+                                )}
+                            </IconButton>
+                        </FlexBetween>
+                    }
+
                 </FlexBetween>}
                 {/* MOBILE NAVIGATION */}
                 {!isNonMobileScreens && (
@@ -292,7 +300,7 @@ const Navbar = () => {
             )}
             {isNonMobileScreens && (
                 <RegisterOverlay
-                    isOpen={isRegisterButtonClicked} 
+                    isOpen={isRegisterButtonClicked}
                 />
             )}
         </Box>

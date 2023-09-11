@@ -6,16 +6,19 @@ import {
     
     } from "@mui/material";
 
-const MainButton = ({ children, isWhite=true, onClickAction, overrideWidth=null}) => {
+const MainButton = ({ children, onClickAction, overridePalette=null, overrideWidth=null}) => {
     const theme = useTheme();
     
     
-    const bgColor = isWhite ? theme.palette.neutral.light : theme.palette.neutral.darkMain;
-    const bgColorAlt = isWhite ? theme.palette.neutral.medium : theme.palette.neutral.main;
-    const textColor = isWhite ? theme.palette.neutral.dark : theme.palette.neutral.light;
+    const bgColor = !overridePalette ? theme.palette.neutral.light : overridePalette['bgColor'];
+    const bgColorAlt = !overridePalette ? theme.palette.neutral.medium : overridePalette['bgColorAlt'];
+    const textColor = !overridePalette ? theme.palette.neutral.dark : overridePalette['textColor'];
+
+    const activeColor = !overridePalette ? theme.palette.neutral.main : overridePalette['activeColor'];
 
     let paperStyles = {
         borderRadius: '5px',
+        marginBottom: '1rem',
         cursor: 'pointer',
         display: 'inline-block',
         transition: 'background-color 0.4s',
@@ -24,7 +27,7 @@ const MainButton = ({ children, isWhite=true, onClickAction, overrideWidth=null}
             backgroundColor: bgColorAlt
         },
         '&:active': {
-            backgroundColor: theme.palette.neutral.main
+            backgroundColor: activeColor
         }
     }
 
@@ -35,7 +38,7 @@ const MainButton = ({ children, isWhite=true, onClickAction, overrideWidth=null}
     return(
         <Paper
             elevation={0}
-            onClick={onClickAction()}
+            onClick={onClickAction}
             sx={paperStyles}
         >
             <Typography

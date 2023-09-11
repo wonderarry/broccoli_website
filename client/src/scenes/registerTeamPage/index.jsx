@@ -10,7 +10,7 @@ import { AddBoxOutlined } from '@mui/icons-material';
 import { render } from '@testing-library/react';
 import Footer from 'scenes/widgets/footer';
 import PageWrapBox from 'components/PageWrapBox';
-
+import axios from 'axios';
 
 
 
@@ -25,8 +25,13 @@ const RegisterTeamPage = () => {
     const textColor = theme.palette.neutral.dark;
     const lightGrey = theme.palette.neutral.veryLight;
 
+    const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
+    const [teamName, setTeamName] = useState('');
 
 
+    const handleTeamNameChange = (newText) => {
+        setTeamName(newText);
+    }
 
     const [isPresetMembersAdded, setIsPresetMembersAdded] = useState(false);
 
@@ -56,6 +61,8 @@ const RegisterTeamPage = () => {
         )
     }
 
+
+
     const handleMemberDiscordIdChange = (targetIndex, newText) => {
         setRenderedList(
             renderedList.map((item) => {
@@ -70,6 +77,9 @@ const RegisterTeamPage = () => {
     const handleAddMember = () => {
         const userId = crypto.randomUUID();
         const oldLength = renderedList.length;
+        if (oldLength >= 5) {
+            return;
+        }
         console.log('id to be used here: ', userId)
         setRenderedList([
             ...renderedList,
@@ -95,7 +105,39 @@ const RegisterTeamPage = () => {
     }
 
     const handleSubmitForm = () => {
+        if (!isSubmitAvailable) {
+            return;
+        }
 
+        const serializedData = renderedList.map((item) => {
+            return {osuId: item.osuId, discordId: item.discordId}
+        })
+
+        let sentData = {
+            members: [
+                {
+                    osuId: formData['osuId'],
+                    discordId: formData['discordId']
+                },
+                ...serializedData
+            ],
+            captainIndex: 0,
+            teamName: teamName
+        }
+        console.log(sentData)
+
+
+        setIsSubmitAvailable(false);
+        axios.post('http://localhost:3001/register/team', sentData)
+            .then(() => {
+                //successfully done
+                setIsSubmitAvailable(true);
+            })
+            .catch((error) => {
+                //something went wrong
+                setIsSubmitAvailable(true);
+                console.error('Error: ', error);
+            })
     }
     //yet to implement - menu for adding players and specific textinput for this interface
     const isNonMobileScreens = useMediaQuery("(min-width: 750px)");
@@ -112,11 +154,28 @@ const RegisterTeamPage = () => {
     }, [renderedList]);
 
 
+    useEffect(() => {
+        if (isPresetMembersAdded) {
+
+            let validFlag = true;
+            if (renderedList.length <= 1) {
+                validFlag = false;
+            }
+            /* formData - check if all fields are not empty */
+            validFlag = validFlag && (formData.discordId != '') && (formData.osuId != '');
+            /* renderedList - check if all fields are not empty */
+            for (let i = 0; i < renderedList.length; i += 1) {
+                validFlag = validFlag && (renderedList[i].discordId) && (renderedList[i].osuId);
+            }
+            setIsSubmitAvailable(validFlag);
+        }
+    }, [formData, renderedList])
+
+
     return (
         <PageWrapBox>
             <Box>
                 <Navbar />
-                <div>registerTeam</div>
 
                 <Box
                     marginLeft='6%'
@@ -127,13 +186,23 @@ const RegisterTeamPage = () => {
                 >
                     <Typography
                         variant='h1'
+                        fontWeight='500'
                         sx={{
-                            paddingTop: '10%',
+                            paddingTop: '8%',
                             paddingBottom: '3rem'
                         }}
                     >
                         Register as a team captain
                     </Typography>
+                    <TextInput 
+                        title="Team name"
+                        placeholder="Example name"
+                        validationType="discordId"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleTeamNameChange}
+                    />
+
                     <TextInput
                         title="Your osu! ID"
                         placeholder="12345678"
@@ -173,7 +242,6 @@ const RegisterTeamPage = () => {
                     }
                     )}
 
-
                     <Box
                         display='flex'
                         flexDirection='row'
@@ -181,11 +249,14 @@ const RegisterTeamPage = () => {
                         sx={{
                             padding: '0.7rem 1.2rem',
                             borderRadius: '6px',
+                            overflow: 'hidden',
+                            transform: (renderedList.length < 5) ? 'scaleY(1)' : 'scaleY(0)',
+                            opacity: (renderedList.length < 5) ? 1 : 0,
                             width: isNonMobileScreens ? 'auto' : '88vw',
                             justifyContent: 'center',
                             border: '1px solid',
                             borderColor: theme.palette.neutral.medium,
-                            transition: 'border-color 0.3s ease, background-color 0.3s ease',
+                            transition: 'border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, opacity 0.6s ease-out',
                             alignItems: 'center',
                             marginBottom: '1.5rem',
                             userSelect: 'none',
@@ -211,9 +282,21 @@ const RegisterTeamPage = () => {
                     <MainButton
                         onClickAction={handleSubmitForm}
                         overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        overridePalette={{
+                            bgColor: isSubmitAvailable ? "#32fa32" : '#d4d4d4',
+                            bgColorAlt: isSubmitAvailable ? "#00bd00" : '#d4d4d4',
+                            textColor: isSubmitAvailable ? "#000000" : '#5c5c5c',
+                            activeColor: isSubmitAvailable ? "#009900" : '#d4d4d4',
+                        }}
+                        isClickable={isSubmitAvailable}
                     >
                         Register
                     </MainButton>
+                    <Box
+                        height="20vh"
+                        width="100%"
+                    >
+                    </Box>
                 </Box>
             </Box>
             <Footer />

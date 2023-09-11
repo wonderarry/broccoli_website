@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const AgentSubmissionSchema = new mongoose.Schema({
+const TeamMemberSchema = new mongoose.Schema({
     osuId: {
         type: Number,
         required: true,
@@ -16,8 +16,30 @@ const AgentSubmissionSchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
+const AgentSubmissionSchema = new mongoose.Schema({
+    osuId: {
+        type: Number,
+        required: true,
+        index: {
+            unique: true,
+            partialFilterExpression: { osuId: { $type: 'string' } }
+        }
+    },
+    discordId: {
+        type: String, 
+        required: true,
+        unique: false
+    },
+    strengthsMask: {
+        type: Number,
+        required: false,
+        unique: false
+    }
+},  {timestamps: true})
+
+
 const TeamSubmissionSchema = new mongoose.Schema({
-    members: [AgentSubmissionSchema],
+    members: [TeamMemberSchema],
     captainIndex: {
         type: Number,
         required: true,

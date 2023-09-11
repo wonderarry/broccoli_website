@@ -2,26 +2,27 @@ import { styled } from "@mui/system";
 import { Typography, useTheme, Box } from "@mui/material";
 import { colorTokens } from "theme";
 
-
-const FooterEntries = ({ onTap, children }) => {
+const FooterSection = ({ children, title }) => {
     const theme = useTheme();
+
     return (
+        <Box
+            display='flex'
+            flexDirection='column'
+        > 
         <Typography
-            onClick={onTap}
+
             variant='h4'
             sx={{
-                color: colorTokens['grey'][100],
-                "&:hover": {
-                    color: colorTokens['grey'][200],
-                    cursor: "pointer"
-                },
-                
+                color: "#32fa32",
                 userSelect: 'none',
                 paddingBottom: '0.8rem'
             }}
         >
-            {children}
+            {title}
         </Typography>
+            {children}
+        </Box>
     )
 }
-export default FooterEntries;
+export default FooterSection;

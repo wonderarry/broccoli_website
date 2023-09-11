@@ -13,6 +13,7 @@ import { CheckBoxSharp } from "@mui/icons-material";
 const TickboxOption = ({ children, defaultState=false, disabled=false, onClickAction }) => {
     const theme = useTheme();
     const usedColor = theme.palette.neutral.dark; // to be changed when used on dark bgs
+    const checkboxFillColor = "#00bd00";
     const [isToggled, setIsToggled] = useState(defaultState);
     return (
         <Box
@@ -33,10 +34,12 @@ const TickboxOption = ({ children, defaultState=false, disabled=false, onClickAc
                 <Checkbox
                     checked={isToggled}
                     size="large"
+                    
                     disabled={disabled}
                     sx={{
+                        
                         '&.Mui-checked': {
-                            color: usedColor
+                            color: checkboxFillColor
                         },
                         '&:hover':{
                             backgroundColor: 'transparent!important'

@@ -80,32 +80,41 @@ export const themeSettings = (mode) => {
             //)
         },
         typography: {
-            fontFamily: ["Inter", "Helvetica"].join(","),
+            fontFamily: ["Poppins", 'Kica'].join(","),
             fontSize: 12,
+            h0: {
+                fontFamily: ['Poppins'].join(","),
+                fontSize: 50,
+                
+            },
             h1: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
-                fontSize: 48,
+                fontFamily: ['Kica'].join(","),
+                fontSize: 80,
             },
             h2: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
+                fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 32,
             },
             h3: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
+                fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 24,
             },
             h4: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
+                fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 20,
             },
             h5: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
-                fontSize: 16,
+                fontFamily: ["Poppins", 'Kica'].join(","),
+                fontSize: 18,
             },
             h6: {
-                fontFamily: ["Inter", "Helvetica"].join(","),
+                fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 14,
             },
+            watermark: {
+                fontFamily: ['Kica'].join(","),
+                fontSize: 16
+            }
         }
     }
 }

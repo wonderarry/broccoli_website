@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from 'scenes/widgets/navbar';
-import { Box } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import MainButton from 'components/MainButton';
 import TextButton from 'components/TextButton';
 import MappoolEntry from 'components/MappoolEntry';
@@ -8,33 +8,87 @@ import TextInput from 'components/TextInput';
 import TickboxOption from 'components/TickboxOption';
 import Footer from 'scenes/widgets/footer';
 import PageWrapBox from 'components/PageWrapBox';
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const isNonMobileScreens = useMediaQuery("(min-width: 900px)");
     return (
         <PageWrapBox>
-        <Box>
-            <Navbar />
-            <div>home</div>
-            <MainButton onClickAction={() => console.log('actuated')}>Register as a Team Captain</MainButton>
-            <TextButton onClickAction={() => console.log('text_actuated')}>Apply to staff</TextButton>
-            <MappoolEntry
-                mapper="Asphyxia"
-                songName="Blue Zenith"
-                songAuthor="Xi"
-                mapType="NM2"
-                mapsetId="292301"
-                mapId="657917"
-            />
-            <TextInput
-                title="Enter your osu! ID"
-                placeholder="osu! ID"
-                validationType="osu"
+            <Box>
+                <Navbar />
+                <Box
+                    marginLeft='6%'
+                    paddingRight='6%'
+                    display='flex'
+                    flexDirection="column"
+                    maxWidth='88vw'
+                    alignItems="flex-start"
+                >
+                    <Typography
+                        variant='h1'
+                        fontWeight='500'
+                        sx={{
+                            paddingTop: '8%',
+                            paddingBottom: '2rem'
+                        }}
+                    >
+                        Broccoli cup 3
+                    </Typography>
 
-            />
-            <TickboxOption onClickAction={() => console.log("tickbox triggered")}>Agree to the terms of the Tournament</TickboxOption>
+                    <Typography
+                        variant='h3'
+                        paddingBottom='0.7rem'
+                        paddingTop='1rem'
+                    >
+                        osu! tournament hosted by
+                    </Typography>
+                    <Typography
+                        variant='h3'
+                        fontWeight='600'
+                        paddingBottom='2rem'
+                    >
+                        megahello & Stage
+                    </Typography>
+                    <Box
+                    >
+                        <MainButton
+                            onClickAction={() => navigate('/register/team')}
+                            overridePalette={{
+                                bgColor: "#32fa32",
+                                bgColorAlt:  "#00bd00",
+                                textColor: "#000000",
+                                activeColor:  "#009900",
+                            }}
+                        >
+                            Team registration
+                        </MainButton>
+                        <Box
+                            width='1rem'
+                            display={isNonMobileScreens ? 'inline-block' : 'block'}
+                        ></Box>
+                        <MainButton
+                            onClickAction={() => navigate('/register/agent')}
+                        >
+                            Agent registration
+                        </MainButton>
+                        <Box
+                            width='1rem'
+                            display={isNonMobileScreens ? 'inline-block' : 'block'}
+                        ></Box>
 
-        </Box>
-        <Footer />
+                        <TextButton
+                            onClickAction={() => { window.location.href = 'https://www.google.com/search?q=apply+to+staff&sourceid=chrome&ie=UTF-8' }}
+                        >
+                            Apply to staff
+                        </TextButton>
+
+                    </Box>
+                </Box>
+            </Box>
+            <Footer />
         </PageWrapBox>
     )
 }

@@ -44,8 +44,11 @@ const fetchTask = cron.schedule('0 */4 * * *', async () => {
         console.log("Fetching fresh data from Google Sheets...");
         app.locals.isUpdating = true;
         await fetchCurrentPlayers();
+        console.log('Successfully fetched current players')
         await fetchCurrentAgents();
+        console.log('Successfully fetched current agents')
         await fetchCurrentTeams();
+        console.log('Successfully fetched current teams')
         app.locals.isUpdating = false;
         console.log("Fetch complete!")
     }

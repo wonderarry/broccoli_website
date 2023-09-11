@@ -2,6 +2,7 @@ import { google, sheets_v4 } from "googleapis";
 import { AgentSubmission, TeamSubmission } from "../models/PlayerSubmission.js";
 import { createSheetsInstance } from "../utility/createSheetsInstance.js";
 
+
 const submitAgent = async (agent) => {
     const [ auth, sheets ] = await createSheetsInstance();
     const appendRequest = await sheets.spreadsheets.values.append({
@@ -11,7 +12,7 @@ const submitAgent = async (agent) => {
         valueInputOption: "RAW",
         resource: {
             values: [
-                [agent.osuId,agent.discordId],
+                [agent.osuId,agent.discordId, agent.strengthsMask],
             ]
         }
     });
@@ -40,12 +41,13 @@ const submitTeam = async (team) => {
 
 export const registerAgent = async (req, res) => {
     try {
-        const { osuId, discordId } = req.body;
+        const { osuId, discordId, strengthsMask } = req.body;
         const newAgent = new AgentSubmission ({
             osuId: osuId,
             discordId: discordId,
+            strengthsMask: strengthsMask
         })
-
+        console.log(newAgent)
         //check if this osu id is already present
         const potentialEntry = await AgentSubmission.findOne({ osuId: osuId });
         if (potentialEntry != null){

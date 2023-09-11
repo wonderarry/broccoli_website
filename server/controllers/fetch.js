@@ -6,6 +6,7 @@ import { createSheetsInstance } from "../utility/createSheetsInstance.js";
 export const fetchCurrentPlayers = async () => {
     //we might need to implement some circumvention of the harsh rate limit later on
     const [auth, sheets] = await createSheetsInstance();
+    
     //here we presume that players in the _api worksheet are only getting added
     const skipCount = await Player.count();
     const rowsRequest = await sheets.spreadsheets.values.get({
@@ -85,7 +86,7 @@ export const fetchCurrentTeams = async () => {
             return i % 2 == 0;
         })
         
-        console.log(memberNames);
+        
         const captainIndex = memberNames.findIndex((item) => {
             return item == captainName;
         })
