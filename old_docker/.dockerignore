@@ -1,6 +1,0 @@
-/server/.env
-/server/node_modules
-/client/node_modules
-Dockerfile
-.dockerignore
-/client/build

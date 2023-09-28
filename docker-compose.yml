@@ -5,6 +5,22 @@ services:
       context: ./client
     ports:
       - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    depends_on:
+      - certbot
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+    command: certonly --standalone -w /var/www/certbot -d megahello.ee -d www.megahello.ee --email wonderarry@gmail.com --agree-tos
+
   
   server:
     env_file:
@@ -14,3 +30,4 @@ services:
     ports:
       - "3001:3001"
     dns: 8.8.8.8
+    restart: always
