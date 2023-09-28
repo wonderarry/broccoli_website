@@ -1,12 +1,16 @@
-version: '1'
+version: '3'
 services:
-  bundle:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+  
+  server:
     env_file:
       - ./server/.env
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ./server
     ports:
-      - "3000:3000"
       - "3001:3001"
     dns: 8.8.8.8
