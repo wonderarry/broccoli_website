@@ -1,0 +1,20 @@
+version: '3'
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+    restart: always
+    
+    
+  
+  server:
+    env_file:
+      - ./server/.env
+    build:
+      context: ./server
+    ports:
+      - "3001:3001"
+    dns: 8.8.8.8
+    restart: always
