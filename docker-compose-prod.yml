@@ -7,7 +7,8 @@ services:
       - "80:80"
       - "443:443"
     restart: always
-    command: nginx -t && nginx -s reload
+    command: []
+    entrypoint: ./prodstart.sh
 
   
   server:
