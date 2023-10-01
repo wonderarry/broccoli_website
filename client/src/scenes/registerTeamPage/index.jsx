@@ -11,7 +11,7 @@ import { render } from '@testing-library/react';
 import Footer from 'scenes/widgets/footer';
 import PageWrapBox from 'components/PageWrapBox';
 import axios from 'axios';
-
+import {v4} from 'uuid';
 
 
 const RegisterTeamPage = () => {
@@ -69,7 +69,7 @@ const RegisterTeamPage = () => {
     }
 
     const handleAddMember = () => {
-        const userId = crypto.randomUUID();
+        const userId = v4();
         const oldLength = renderedList.length;
         if (oldLength >= 5) {
             return;
