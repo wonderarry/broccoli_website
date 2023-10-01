@@ -7,7 +7,11 @@ COPY . .
 RUN npm run build
 
 FROM nginx:latest
+# Copy in the build files
 COPY --from=clientbuild /app/client/build /usr/share/nginx/html
+# Add the nginx configuration
+COPY ./nginx/conf /etc/nginx/conf.d
+COPY ./prodstart.sh .
 RUN apt install certbot
 
 
