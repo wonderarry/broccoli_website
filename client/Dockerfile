@@ -7,21 +7,12 @@ COPY . .
 RUN npm run build
 
 FROM ubuntu/nginx
-## System nginx setup ##
-
-# # Install nginx
-# RUN apt install nginx
-# # Setup firewall
-# RUN ufw allow 'Nginx Full'
-# # Don't run nginx on reboot
-# RUN systemctl disable nginx
-# # Don't run nginx during image creation as well
-# RUN systemctl stop nginx
 
 ## Setup for the website ##
 
 # Copy in the build files
-COPY --from=clientbuild /app/client/build /var/www/html/
+RUN mkdir /var/www/html/broccwebsite
+COPY --from=clientbuild /app/client/build /var/www/html/broccwebsite
 # Add the nginx configuration
 COPY ./nginx/conf/tournaments.megahello.ee.conf /etc/nginx/conf.d
 RUN pwd
@@ -33,8 +24,6 @@ RUN python3 -m venv /opt/certbot/
 RUN /opt/certbot/bin/pip install --upgrade pip
 RUN /opt/certbot/bin/pip install certbot certbot-nginx
 RUN ln -s /opt/certbot/bin/certbot /usr/bin/certbot
-
-RUN nginx -c /etc/nginx/nginx.conf
 
 
 # Add in the production bash script
