@@ -29,6 +29,7 @@ RUN ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 
 # Add in the production bash script
 COPY ./prodstart.sh .
+RUN chmod +x ./prodstart.sh
 EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
