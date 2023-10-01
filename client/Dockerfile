@@ -8,6 +8,8 @@ RUN npm run build
 
 FROM nginx:latest
 COPY --from=clientbuild /app/client/build /usr/share/nginx/html
+RUN apt install certbot
+
 
 EXPOSE 80
 
