@@ -8,7 +8,4 @@ nginx
 certbot --nginx -d tournaments.megahello.ee --email wonderarry@gmail.com --agree-tos -v
 
 # Step 3: Add a cron job to renew the certificate daily at 12:00 PM
-(crontab -l ; echo "0 12 * * * /usr/bin/certbot renew --quiet") | crontab -
-
-# Step 4: Run in foreground
-nginx -g 'daemon off;'
+# (crontab -l ; echo "0 12 * * * /usr/bin/certbot renew --quiet") | crontab -
