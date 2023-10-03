@@ -122,7 +122,7 @@ const RegisterTeamPage = () => {
 
 
         setIsSubmitAvailable(false);
-        axios.post('api/register/team', sentData)
+        axios.post('/api/register/team', sentData)
             .then(() => {
                 //successfully done
                 setIsSubmitAvailable(true);
