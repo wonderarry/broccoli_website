@@ -10,6 +10,7 @@ services:
     restart: always
     command: []
     entrypoint: ./prodstart.sh
+    network_mode: host
 
 
   
