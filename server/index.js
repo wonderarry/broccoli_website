@@ -33,7 +33,7 @@ app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 //     }
 // });
 // const upload = multer({ storage });
-
+// console.log(Buffer.from(process.env.SERVICE_ACCOUNT_PRIVATE_KEY).toString('base64'))
 
 //setup for mongoose
 const PORT = process.env.SERVER_PORT || 3001; // 3001 is the backup port in case the .env value is not specified

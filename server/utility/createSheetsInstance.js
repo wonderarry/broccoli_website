@@ -1,12 +1,11 @@
 import { google } from "googleapis";
 
 export async function createSheetsInstance(){
-    console.log('before change: ', process.env.SERVICE_ACCOUNT_PRIVATE_KEY)
-    console.log('after change: ', process.env.SERVICE_ACCOUNT_PRIVATE_KEY.split(String.raw`\n`).join('\n'))
+    const privatekey = Buffer.from(process.env.SERVICE_ACCOUNT_PRIVATE_KEY, 'base64').toString('ascii');
     const auth = new google.auth.GoogleAuth({
         credentials: {
             client_email: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL,
-            private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY.split(String.raw`\n`).join('\n'),
+            private_key: privatekey,
         },
         scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
