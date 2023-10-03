@@ -122,7 +122,7 @@ const RegisterTeamPage = () => {
 
 
         setIsSubmitAvailable(false);
-        axios.post('http://localhost:3001/register/team', sentData)
+        axios.post('http://server:3001/register/team', sentData)
             .then(() => {
                 //successfully done
                 setIsSubmitAvailable(true);

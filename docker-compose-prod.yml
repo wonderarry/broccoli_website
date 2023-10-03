@@ -10,7 +10,9 @@ services:
     restart: always
     command: []
     entrypoint: ./prodstart.sh
-    network_mode: host
+    networks:
+      - mynetwork
+    
 
   
   server:
@@ -22,3 +24,9 @@ services:
       - "3001:3001"
     dns: 8.8.8.8
     restart: always
+    networks:
+      - mynetwork
+
+
+networks:
+  mynetwork:

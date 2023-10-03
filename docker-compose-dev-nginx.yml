@@ -8,7 +8,9 @@ services:
       - "80:80"
       - "443:443"
     restart: always
-    network_mode: host
+    networks:
+      - mynetwork
+    
     
     
   
@@ -21,3 +23,8 @@ services:
       - "3001:3001"
     dns: 8.8.8.8
     restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
