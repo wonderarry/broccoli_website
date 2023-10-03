@@ -13,7 +13,7 @@ services:
   
   server:
     env_file:
-      - ./server/.env
+      - ./.env
     build:
       context: ./server
     ports:
