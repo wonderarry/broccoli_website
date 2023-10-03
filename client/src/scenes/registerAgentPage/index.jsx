@@ -100,7 +100,7 @@ const RegisterAgentPage = () => {
 
         console.log(sentData)
         setIsSubmitAvailable(false);
-        axios.post('http://localhost:3001/register/agent', sentData)
+        axios.post('api/register/agent', sentData)
             .then(() => {
                 //successfully done
                 setIsSubmitAvailable(true);
