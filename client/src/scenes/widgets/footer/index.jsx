@@ -38,18 +38,18 @@ const Footer = () => {
                 >
 
                     <Box
-                        onClick={() => { window.location.href = 'https://www.google.com/search?q=discord&newwindow=1' }}
+                        onClick={() => { window.location.href = 'https://discord.gg/gqYdbYBRBN' }}
                     >
                         <img src={discordLogo} />
                     </Box>
                     {/* General - Home, Registers, Apply to staff, Forum post */}
                     <FooterSection title='General'>
                         <FooterEntries onTap={() => navigate('/')}>Home</FooterEntries>
-                        <FooterEntries onTap={() => navigate('/register/team')}>Register as Free Agent</FooterEntries>
-                        <FooterEntries onTap={() => navigate('/register/agent')}>Register as Team</FooterEntries>
+                        <FooterEntries onTap={() => navigate('/register/agent')}>Register as Free Agent</FooterEntries>
+                        <FooterEntries onTap={() => navigate('/register/team')}>Register as Team</FooterEntries>
                         <FooterEntries
                             onTap={() => {
-                                window.location.href = 'https://www.google.com/search?q=apply+to+staff&sourceid=chrome&ie=UTF-8'
+                                window.location.href = 'https://forms.gle/GeFp73jLDiri92VL7'
                             }}
                         >
                             Apply to staff

@@ -77,7 +77,7 @@ const HomePage = () => {
                         ></Box>
 
                         <TextButton
-                            onClickAction={() => { window.location.href = 'https://www.google.com/search?q=apply+to+staff&sourceid=chrome&ie=UTF-8' }}
+                            onClickAction={() => { window.location.href = 'https://forms.gle/GeFp73jLDiri92VL7' }}
                         >
                             Apply to staff
                         </TextButton>
