@@ -92,7 +92,7 @@ const RegisterTeamPage = () => {
             return targetIndex != item.id;
         })
         const listWithReorderedEnumeration = listWithExcludedMember.map((item, index) => {
-            return { ...item, enumval: index + 1 };
+            return { ...item, enumval: index + 2 };
         })
         //console.log(listWithReorderedEnumeration)
         setRenderedList(listWithReorderedEnumeration)
