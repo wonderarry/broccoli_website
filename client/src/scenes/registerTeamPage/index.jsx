@@ -41,7 +41,7 @@ const RegisterTeamPage = () => {
             ...formData,
             [targetName]: newText
         })
-        console.log(newText)
+        //console.log(newText)
     }
 
     const handleMemberOsuIdChange = (targetIndex, newText) => {
@@ -74,27 +74,27 @@ const RegisterTeamPage = () => {
         if (oldLength >= 5) {
             return;
         }
-        console.log('id to be used here: ', userId)
+        //console.log('id to be used here: ', userId)
         setRenderedList([
             ...renderedList,
             {
                 id: userId,
                 discordId: '',
                 osuId: '',
-                enumval: oldLength + 1
+                enumval: oldLength + 2
             }
         ])
     }
 
     const handleRemoveMember = (targetIndex) => {
-        console.log(targetIndex)
+        //console.log(targetIndex)
         const listWithExcludedMember = renderedList.filter((item) => {
             return targetIndex != item.id;
         })
         const listWithReorderedEnumeration = listWithExcludedMember.map((item, index) => {
             return { ...item, enumval: index + 1 };
         })
-        console.log(listWithReorderedEnumeration)
+        //console.log(listWithReorderedEnumeration)
         setRenderedList(listWithReorderedEnumeration)
     }
 
@@ -118,7 +118,7 @@ const RegisterTeamPage = () => {
             captainIndex: 0,
             teamName: teamName
         }
-        console.log(sentData)
+        //console.log(sentData)
 
 
         setIsSubmitAvailable(false);

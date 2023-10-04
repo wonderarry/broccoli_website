@@ -34,7 +34,7 @@ export const fetchCurrentPlayers = async () => {
         catch (e) {
             console.log("Player with data: ", currentRow, " couldn't be submitted. Error: ", e)
         }
-        console.log('index: ', i)
+        // console.log('index: ', i)
     }
 }
 

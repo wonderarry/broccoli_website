@@ -57,7 +57,7 @@ const RegisterAgentPage = () => {
             ...formData,
             [targetName]: newText
         })
-        console.log(newText)
+        //console.log(newText)
     }
 
     const handleSkillsChange = (targetName) => (isToggled) => {
@@ -70,7 +70,7 @@ const RegisterAgentPage = () => {
 
         setEnabledCount(countBeforeChanged + newModifier);
         //console.log(skillsData)
-        console.log(isToggled)
+        //console.log(isToggled)
     }
 
     useEffect(() => {
@@ -98,7 +98,7 @@ const RegisterAgentPage = () => {
             strengthsMask: bitmask
         }
 
-        console.log(sentData)
+        //console.log(sentData)
         setIsSubmitAvailable(false);
         axios.post('/api/register/agent', sentData)
             .then(() => {

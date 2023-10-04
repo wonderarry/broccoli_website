@@ -196,6 +196,7 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
                         sx={{
                             marginTop: '0rem'
                         }}
+                        disableRipple={true}
                     >
                         <CloseSharp fontSize="large" sx={{
                             color: 'black',
@@ -233,6 +234,7 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
                     sx={{
                         marginBottom: '0.3rem'
                     }}
+                    disableRipple={true}
                 >
                     <CloseSharp fontSize="large" sx={{
                         color: 'black',
