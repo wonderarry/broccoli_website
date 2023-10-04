@@ -114,15 +114,15 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
         height: 0
     }
 
-    const firstUpdate = useRef(true)
+    // const firstUpdate = useRef(true)
 
     useEffect(() => {
         console.log('event triggered!, id = ', playerIndex)
         // console.log(firstUpdate.current, lastUpdate.current)
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            return;
-        }
+        // if (firstUpdate.current) {
+        //     firstUpdate.current = false;
+        //     return;
+        // }
         if (!syntheticTrigger) {
             setIsExpandReady(true);
             
