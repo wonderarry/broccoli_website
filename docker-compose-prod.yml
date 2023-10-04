@@ -12,7 +12,7 @@ services:
     command: []
     entrypoint: ./prodstart.sh
     volumes:
-      - ./client/letsencrypt:/root/broccwebsite/letsencrypt:rw
+      - ./client/letsencrypt:/etc/letsencrypt:ro
     
 
 
