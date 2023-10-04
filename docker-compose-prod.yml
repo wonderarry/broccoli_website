@@ -12,7 +12,7 @@ services:
     command: []
     entrypoint: ./prodstart.sh
     volumes:
-      - ./client/letsencrypt:/etc/letsencrypt:ro
+      - ./client/letsencrypt:/etc/letsencrypt:rw
     
 
 
