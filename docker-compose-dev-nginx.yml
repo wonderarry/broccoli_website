@@ -3,6 +3,7 @@ services:
   client:
     build:
       context: ./client
+      dockerfile: Dockerfile-dev-nginx
     
     ports:
       - "80:80"

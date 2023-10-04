@@ -11,6 +11,7 @@ server/node_modules
 # production
 /build
 /client/build
+/client/letsencrypt
 
 # misc
 .DS_Store

@@ -5,7 +5,7 @@ nginx -t
 nginx
 
 # Step 2: Request and renew the SSL certificate using Certbot
-certbot --nginx -d tournaments.megahello.ee --email wonderarry@gmail.com --agree-tos -v
+certbot renew
 
 # Step 3: Make it run permanently
 tail -f /dev/null

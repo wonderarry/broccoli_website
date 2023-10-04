@@ -3,6 +3,7 @@ services:
   client:
     build:
       context: ./client
+      dockerfile: Dockerfile
     
     ports:
       - "80:80"
@@ -10,6 +11,8 @@ services:
     restart: always
     command: []
     entrypoint: ./prodstart.sh
+    volumes:
+      - ./client/letsencrypt:/root/broccwebsite/letsencrypt:rw
     
 
 
