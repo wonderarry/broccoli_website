@@ -49,10 +49,9 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
     const osuInputValidation = (event) => {
         if (event.ctrlKey) {
             controlPressRef.current = true;
-            //console.log('ctrl key down')
+            
         }
-        //console.log(event.key)
-        //console.log(controlPressRef.current)
+        
         if (!/[0-9]/.test(event.key) && event.key.length == 1) {
             if (
                 !(
@@ -60,7 +59,7 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
                     (event.key == 'a' || event.key == 'c' || event.key == 'v')
                 )
             ) {
-                //console.log('event prevented')
+            
                 event.preventDefault();
             }
 
@@ -68,7 +67,6 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
     }
 
     const discordInputValidation = (event) => {
-        //console.log(event.key)
         if (!/^[A-Za-z0-9_.@]$/.test(event.key) && event.key.length == 1) {
             event.preventDefault();
         }
@@ -119,6 +117,7 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
     const firstUpdate = useRef(true)
 
     useEffect(() => {
+        console.log('event triggered!, id = ', playerIndex)
         // console.log(firstUpdate.current, lastUpdate.current)
         if (firstUpdate.current) {
             firstUpdate.current = false;
