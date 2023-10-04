@@ -117,7 +117,7 @@ const RegisteringTeamMember = ({ playerIndex, onChangeOsuId, onChangeDiscordId, 
     // const firstUpdate = useRef(true)
 
     useEffect(() => {
-        console.log('event triggered!, id = ', playerIndex)
+        //console.log('event triggered!, id = ', playerIndex)
         // console.log(firstUpdate.current, lastUpdate.current)
         // if (firstUpdate.current) {
         //     firstUpdate.current = false;
