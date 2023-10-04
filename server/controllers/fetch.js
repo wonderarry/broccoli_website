@@ -45,30 +45,35 @@ export const fetchCurrentAgents = async () => {
         spreadsheetId: process.env.SPREADSHEET_AGENTS_ID,
         range: process.env.SPREADSHEET_AGENTS_RANGE,
     });
-    
+
     const requestData = rowsRequest.data.values;
     // console.log('agents: ', requestData);
     //here we're hopping over odd rows due to the expected formatting of the sheet
-    for (let i = 0; i < requestData.length; i += 2) {
-        try {
-            const currentName = requestData[i][0];
-            const potentialMatch = await Agent.findOne({ osuName: currentName });
-            if (potentialMatch === null) {
-                const existingRecord = await Player.findOne({ osuName: currentName });
-                const newAgent = new Agent({
-                    osuId: existingRecord.osuId,
-                    osuName: existingRecord.osuName,
-                    rankNoBWS: existingRecord.rankNoBWS,
-                    badgeCount: existingRecord.badgeCount,
-                    pp: existingRecord.pp,
-                    rankWithBWS: existingRecord.rankWithBWS
-                });
-                await newAgent.save()
+    try {
+        for (let i = 0; i < requestData.length; i += 2) {
+            try {
+                const currentName = requestData[i][0];
+                const potentialMatch = await Agent.findOne({ osuName: currentName });
+                if (potentialMatch === null) {
+                    const existingRecord = await Player.findOne({ osuName: currentName });
+                    const newAgent = new Agent({
+                        osuId: existingRecord.osuId,
+                        osuName: existingRecord.osuName,
+                        rankNoBWS: existingRecord.rankNoBWS,
+                        badgeCount: existingRecord.badgeCount,
+                        pp: existingRecord.pp,
+                        rankWithBWS: existingRecord.rankWithBWS
+                    });
+                    await newAgent.save()
+                }
+            }
+            catch (e) {
+                console.log("Fetching free agent ", requestData[i], " failed. Error: ", e)
             }
         }
-        catch (e) {
-            console.log("Fetching free agent ", requestData[i], " failed. Error: ", e)
-        }
+    }
+    catch (e) {
+        console.log("Fetching free agents - loop failed. Error: ", e);
     }
 
 }
@@ -89,51 +94,56 @@ export const fetchCurrentTeams = async () => {
     const latestEntry = await Team.findOne().sort({ createdAt: -1 });
 
     //here we're NOT hopping over odd rows due to the actual formatting of the sheet
-    for (let i = 0; i < requestData.length; i += 1) {
-        const currentRow = requestData[i];
-        try {
-            const teamName = currentRow[0];
-            const captainName = currentRow[4];
- 
-            // in case we need to jump between cells
-            const memberNames = currentRow.slice(4, currentRow.length).filter((v, i) => {
-                return i % 1 == 0;
-            })
+    try {
+        for (let i = 0; i < requestData.length; i += 1) {
+            const currentRow = requestData[i];
+            try {
+                const teamName = currentRow[0];
+                const captainName = currentRow[4];
+
+                // in case we need to jump between cells
+                const memberNames = currentRow.slice(4, currentRow.length).filter((v, i) => {
+                    return i % 1 == 0;
+                })
 
 
-            const captainIndex = memberNames.findIndex((item) => {
-                return item == captainName;
-            })
-            const newTeam = new Team({
-                members: await Promise.all(memberNames.map(async (username) => {
-                    const matchingPlayer = await Player.findOne({ osuName: username });
-                    if (matchingPlayer === null) {
-                        return null;
-                    }
-                    return {
-                        osuId: matchingPlayer.osuId,
-                        osuName: matchingPlayer.osuName,
-                        rankNoBWS: matchingPlayer.rankNoBWS,
-                        badgeCount: matchingPlayer.badgeCount,
-                        pp: matchingPlayer.pp,
-                        rankWithBWS: matchingPlayer.rankWithBWS
-                    }
-                })),
-                captainIndex: captainIndex,
-                teamName: teamName
-            })
-            const requiredPadding = 6 - newTeam.members.length;
-            for (let i = 0; i < requiredPadding; i += 1) {
-                newTeam.members.push(null);
+                const captainIndex = memberNames.findIndex((item) => {
+                    return item == captainName;
+                })
+                const newTeam = new Team({
+                    members: await Promise.all(memberNames.map(async (username) => {
+                        const matchingPlayer = await Player.findOne({ osuName: username });
+                        if (matchingPlayer === null) {
+                            return null;
+                        }
+                        return {
+                            osuId: matchingPlayer.osuId,
+                            osuName: matchingPlayer.osuName,
+                            rankNoBWS: matchingPlayer.rankNoBWS,
+                            badgeCount: matchingPlayer.badgeCount,
+                            pp: matchingPlayer.pp,
+                            rankWithBWS: matchingPlayer.rankWithBWS
+                        }
+                    })),
+                    captainIndex: captainIndex,
+                    teamName: teamName
+                })
+                const requiredPadding = 6 - newTeam.members.length;
+                for (let i = 0; i < requiredPadding; i += 1) {
+                    newTeam.members.push(null);
+                }
+                await newTeam.save();
             }
-            await newTeam.save();
+            catch (e) {
+                console.log("Fetching team ", currentRow, " failed. Error: ", e)
+            }
         }
-        catch(e){
-            console.log("Fetching team ", currentRow, " failed. Error: ", e)
-        }
-        
-    }
 
+
+    }
+    catch (e) {
+        console.log("Fetching teams - loop failed. Error: ", e);
+    }
     if (latestEntry !== null) {
         const latestDate = latestEntry.createdAt;
         await Team.deleteMany({ createdAt: { $lt: latestDate } });
