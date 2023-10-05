@@ -8,7 +8,8 @@ import MainButton from 'components/MainButton';
 import Footer from 'scenes/widgets/footer';
 import PageWrapBox from 'components/PageWrapBox';
 import axios from 'axios';
-
+import submitValidator from 'ulility/submitValidator';
+import RegisterNotification from 'components/RegisterNotification';
 
 
 
@@ -20,6 +21,11 @@ const RegisterAgentPage = () => {
     const theme = useTheme();
     const darkFont = theme.palette.neutral.dark;
     const altFont = theme.palette.neutral.light;
+    const [popupContent, setPopupContent] = useState({
+        isShown: false,
+        text: '',
+        color: '#000000'
+    })
 
     const [formData, setFormData] = useState({
         discordId: '',
@@ -98,24 +104,82 @@ const RegisterAgentPage = () => {
             strengthsMask: bitmask
         }
 
+
         //console.log(sentData)
         setIsSubmitAvailable(false);
-        axios.post('/api/register/agent', sentData)
-            .then(() => {
-                //successfully done
+        setPopupContent({
+            ...popupContent,
+            isShown: false
+        })
+        axios.post('/api/register/agent', sentData, {
+            validateStatus: submitValidator
+        })
+            .then((response) => {
                 setIsSubmitAvailable(true);
+                if (response.status === 201) { // Successfully added an agent
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Successfully registered as an agent! Check in a few hours if you have appeared on the agents list - if not, contact staff.',
+                        color: '#50B550'
+                    })
+                }
+                else if (response.status === 409) { // Duplicate agent
+                    setPopupContent({
+                        isShown: true,
+                        text: 'This osu! id is already registered! If you think this is an error, contact staff team.',
+                        color: '#B55050'
+                    })
+                }
             })
             .catch((error) => {
                 //something went wrong
                 setIsSubmitAvailable(true);
-                console.error('Error: ', error);
+                if (error.response) { // Received some other response
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Error. Received response code: ' + String(error.response.status),
+                        color: '#000000'
+                    })
+                }
+                else if (error.request) { // Network error
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Network error, failed to receive response.',
+                        color: '#000000'
+                    })
+                }
+                else { // Code execution error
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Unhandled code error.',
+                        color: '#000000'
+                    })
+                }
             })
 
     }
 
+    const handleClosePopup = () => {
+        setPopupContent({
+            ...popupContent,
+            isShown: false
+        })
+    }
+
+
+
     return (
         <PageWrapBox>
             <Box>
+                {popupContent.isShown &&
+                    <RegisterNotification
+                        onClose={handleClosePopup}
+                        color={popupContent.color}
+                    >
+                        {popupContent.text}
+                    </RegisterNotification>
+                }
+
                 <Navbar />
 
                 <Box

@@ -11,17 +11,23 @@ import { render } from '@testing-library/react';
 import Footer from 'scenes/widgets/footer';
 import PageWrapBox from 'components/PageWrapBox';
 import axios from 'axios';
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
+import submitValidator from 'ulility/submitValidator';
+import RegisterNotification from 'components/RegisterNotification';
 
 
 const RegisterTeamPage = () => {
 
     const theme = useTheme();
-    
+
 
     const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
     const [teamName, setTeamName] = useState('');
-
+    const [popupContent, setPopupContent] = useState({
+        isShown: false,
+        text: '',
+        color: '#000000'
+    })
 
     const handleTeamNameChange = (newText) => {
         setTeamName(newText);
@@ -104,7 +110,7 @@ const RegisterTeamPage = () => {
         }
 
         const serializedData = renderedList.map((item) => {
-            return {osuId: item.osuId, discordId: item.discordId}
+            return { osuId: item.osuId, discordId: item.discordId }
         })
 
         let sentData = {
@@ -120,17 +126,56 @@ const RegisterTeamPage = () => {
         }
         //console.log(sentData)
 
-
+        
         setIsSubmitAvailable(false);
-        axios.post('/api/register/team', sentData)
-            .then(() => {
-                //successfully done
+        setPopupContent({
+            ...popupContent,
+            isShown: false
+        })
+        axios.post('/api/register/team', sentData, {
+            validateStatus: submitValidator
+        })
+            .then((response) => {
                 setIsSubmitAvailable(true);
+                if (response.status === 201) { // Successfully added an agent
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Successfully registered as a team! Check in a few hours if you have appeared on the teams list - if not, contact staff.',
+                        color: '#50B550'
+                    })
+                }
+                else if (response.status === 409) { // Duplicate agent
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Duplicate team already registered! If you think this is an error, contact staff team.',
+                        color: '#B55050'
+                    })
+                }
             })
             .catch((error) => {
                 //something went wrong
                 setIsSubmitAvailable(true);
-                console.error('Error: ', error);
+                if (error.response) { // Received some other response
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Error. Received response code: ' + String(error.response.status),
+                        color: '#000000'
+                    })
+                }
+                else if (error.request) { // Network error
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Network error, failed to receive response.',
+                        color: '#000000'
+                    })
+                }
+                else { // Code execution error
+                    setPopupContent({
+                        isShown: true,
+                        text: 'Unhandled code error.',
+                        color: '#000000'
+                    })
+                }
             })
     }
     //yet to implement - menu for adding players and specific textinput for this interface
@@ -165,10 +210,26 @@ const RegisterTeamPage = () => {
         }
     }, [formData, renderedList])
 
+    const handleClosePopup = () => {
+        setPopupContent({
+            ...popupContent,
+            isShown: false
+        })
+    }
+
 
     return (
         <PageWrapBox>
             <Box>
+                {popupContent.isShown &&
+                    <RegisterNotification
+                        onClose={handleClosePopup}
+                        color={popupContent.color}
+                    >
+                        {popupContent.text}
+                    </RegisterNotification>
+                }
+
                 <Navbar />
 
                 <Box
@@ -188,7 +249,7 @@ const RegisterTeamPage = () => {
                     >
                         Register as a team captain
                     </Typography>
-                    <TextInput 
+                    <TextInput
                         title="Team name"
                         placeholder="Example name"
                         validationType="discordId"
