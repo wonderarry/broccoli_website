@@ -53,7 +53,7 @@ const RegisterNotification = ({ children, onClose, color="#000000", autoCloseTim
         <Paper
             sx={{
                 ...paperStyles,
-                position: 'absolute',
+                position: 'fixed',
                 backgroundColor: '#f2f2f2',
                 zIndex: 100,
                 top: '5.5%',
