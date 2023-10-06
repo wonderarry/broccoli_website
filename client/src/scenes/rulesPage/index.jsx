@@ -132,7 +132,7 @@ const RulesPage = () => {
                             </StyledList>
                         </CustomListItem>
                         <CustomListItem>
-                            Anyone that meets the above requirements may register before <span style={{ color: "#33cc33" }}>Sep Oct 16, 12 UTC</span>.
+                            Anyone that meets the above requirements may register before <span style={{ color: "#33cc33" }}>Oct 20, 12 UTC</span>.
                             To sign up, the player should:
                             <StyledList>
                                 <CustomListItem sub={true}>Fill out the registration form on the website (you are here!).</CustomListItem>
