@@ -252,7 +252,7 @@ const RegisterTeamPage = () => {
                     <TextInput
                         title="Team name"
                         placeholder="Example name"
-                        validationType="discordId"
+                        validationType="any"
                         initialValue=""
                         overrideWidth={!isNonMobileScreens ? '88vw' : null}
                         onChangeAction={handleTeamNameChange}
@@ -268,7 +268,7 @@ const RegisterTeamPage = () => {
                     />
                     <TextInput
                         title="Your Discord"
-                        placeholder="@user"
+                        placeholder="Discord Tag"
                         validationType="discordId"
                         initialValue=""
                         overrideWidth={!isNonMobileScreens ? '88vw' : null}

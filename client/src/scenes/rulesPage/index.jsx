@@ -117,7 +117,7 @@ const RulesPage = () => {
                         </CustomListItem>
                         <CustomListItem>
                             These 3 different tiers have separate rank ranges.
-                            <span style={{ color: "#33cc33" }}>A team must consist of at least 1 player from each tier.</span>
+                            <span style={{ color: "#33cc33" }}> A team must consist of at least 1 player from each tier.</span>
                             <StyledList>
                                 <CustomListItem sub={true}>Tier 1: 750-2999 BWS</CustomListItem>
                                 <CustomListItem sub={true}>Tier 2: 3000-7999 BWS</CustomListItem>

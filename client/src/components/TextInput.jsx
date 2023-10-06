@@ -101,7 +101,7 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
                 placeholder={placeholder}
                 onChange={handleValueChange}
                 onKeyDown={
-                    validationType == 'osuId' ? osuInputValidation : discordInputValidation
+                    validationType == 'osuId' ? osuInputValidation : (validationType === 'discordId' ? discordInputValidation : () => {return;})
                 }
                 onKeyUp={
                     (event) => {

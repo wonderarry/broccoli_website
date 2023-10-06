@@ -22,10 +22,10 @@ import FlexBetween from "components/FlexBetween";
 import { DarkMode, LightMode, Menu, Close, KeyboardArrowDownSharp } from "@mui/icons-material"
 
 
-const CustomDesktopMenuButton = ({ children, toWhere }) => {
+const CustomDesktopMenuButton = ({ children, toWhere, color = '#000000' }) => {
     const navigate = useNavigate();
     const theme = useTheme();
-    const neutralDark = theme.palette.neutral.dark;
+    const neutralDark = color;
     const neutralMain = theme.palette.neutral.main;
     return (
         <Typography
@@ -47,10 +47,10 @@ const CustomDesktopMenuButton = ({ children, toWhere }) => {
     )
 }
 
-const CustomMobileMenuButton = ({ children, toWhere }) => {
+const CustomMobileMenuButton = ({ children, toWhere, color='#1a1a1a' }) => {
     const navigate = useNavigate();
     const theme = useTheme();
-    const neutralDark = theme.palette.neutral.dark;
+    const neutralDark = color;
     const neutralMain = theme.palette.neutral.main;
     const neutralMedium = theme.palette.neutral.medium;
     return (
@@ -234,11 +234,11 @@ const Navbar = () => {
                             }}
                         />
                     </FlexBetween>
-                    <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton toWhere="/agents">Free Agents</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton toWhere="/bracket">Bracket</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton toWhere="/mappool">Mappool</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/teams">Teams </CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/agents">Free Agents</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/mappool">Mappool</CustomDesktopMenuButton>
                     {false &&
                         <FlexBetween gap="2rem">
                             <IconButton onClick={() => dispatch(setMode())}>
@@ -289,13 +289,14 @@ const Navbar = () => {
                         zIndex: 20,
                     }}
                 >
-                    <CustomMobileMenuButton toWhere='/teams'>Teams</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/bracket'>Bracket</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/mappool'>Mappool</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/teams'>Teams</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/agents'>Agents</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/bracket'>Bracket</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/mappool'>Mappool</CustomMobileMenuButton>
+                    
                 </Box>
             )}
             {isNonMobileScreens && (

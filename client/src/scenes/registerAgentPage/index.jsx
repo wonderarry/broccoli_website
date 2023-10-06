@@ -209,7 +209,7 @@ const RegisterAgentPage = () => {
                     />
                     <TextInput
                         title="Your Discord"
-                        placeholder="@user"
+                        placeholder="Discord Tag"
                         validationType="discordId"
                         initialValue=""
                         overrideWidth={!isNonMobileScreens ? '88vw' : null}
