@@ -3,8 +3,9 @@ import Navbar from 'scenes/widgets/navbar';
 import { Box, Typography } from '@mui/material';
 import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
-
+import {useMediaQuery} from '@mui/material';
 const AgentsPage = () => {
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     return (
         <PageWrapBox>
             <Box>
@@ -22,6 +23,9 @@ const AgentsPage = () => {
                     color='black'
                     fontWeight='500'
                     textAlign='center'
+                    sx={{
+                        fontSize: [overrideFontSize, "!important"]
+                    }}
                 >
                     The agents section is currently under development.
                 </Typography>

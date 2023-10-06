@@ -4,7 +4,9 @@ import { Box } from '@mui/material';
 import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
 import {Typography} from '@mui/material';
+import {useMediaQuery} from '@mui/material';
 const MappoolPage = () => {
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     return (
         <PageWrapBox>
             <Box>
@@ -22,6 +24,9 @@ const MappoolPage = () => {
                     color='black'
                     fontWeight='500'
                     textAlign='center'
+                    sx={{
+                        fontSize: [overrideFontSize, "!important"]
+                    }}
                 >
                     The mappool section is currently under development.
                 </Typography>

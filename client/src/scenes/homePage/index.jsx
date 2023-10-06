@@ -12,6 +12,7 @@ const HomePage = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width: 900px)");
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     return (
         <PageWrapBox>
             <Box>
@@ -29,7 +30,9 @@ const HomePage = () => {
                         fontWeight='500'
                         sx={{
                             paddingTop: '8%',
-                            paddingBottom: '2rem'
+                            paddingBottom: '2rem',
+                            fontSize: [overrideFontSize, "!important"]
+                            
                         }}
                     >
                         Broccoli cup 3

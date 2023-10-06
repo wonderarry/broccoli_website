@@ -20,7 +20,7 @@ const RegisterTeamPage = () => {
 
     const theme = useTheme();
 
-
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
     const [teamName, setTeamName] = useState('');
     const [popupContent, setPopupContent] = useState({
@@ -244,7 +244,10 @@ const RegisterTeamPage = () => {
                         fontWeight='500'
                         sx={{
                             paddingTop: '8%',
-                            paddingBottom: '3rem'
+                            paddingBottom: '3rem',
+                           
+                            fontSize: [overrideFontSize, "!important"]
+                            
                         }}
                     >
                         Register as a team captain

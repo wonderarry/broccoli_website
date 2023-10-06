@@ -17,6 +17,8 @@ import RegisterNotification from 'components/RegisterNotification';
 
 const RegisterAgentPage = () => {
 
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
+
     const [enabledCount, setEnabledCount] = useState(0);
     const theme = useTheme();
     const darkFont = theme.palette.neutral.dark;
@@ -194,7 +196,9 @@ const RegisterAgentPage = () => {
                         fontWeight='500'
                         sx={{
                             paddingTop: '8%',
-                            paddingBottom: '3rem'
+                            paddingBottom: '3rem',
+                            fontSize: [overrideFontSize, "!important"]
+                            
                         }}
                     >
                         Register as a free agent

@@ -5,6 +5,7 @@ import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
 import { useState } from 'react';
 import { styled } from "@mui/system";
+import {useMediaQuery} from '@mui/material';
 
 
 const RuleButton = ({ children, title }) => {
@@ -73,7 +74,8 @@ const CustomListItem = ({ children, sub = false }) => {
             <Typography
                 variant='h3'
                 sx={{
-                    flexWrap: 'wrap'
+                    flexWrap: 'wrap',
+                    maxWidth: '80dvw'
                 }}
             >
                 {bulletpoint} {children}
@@ -93,8 +95,7 @@ const StyledList = styled(List)({
 
 
 const RulesPage = () => {
-
-
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     return (
         <PageWrapBox>
             <Box>
@@ -105,7 +106,8 @@ const RulesPage = () => {
                     sx={{
                         paddingTop: '5%',
                         paddingBottom: '3rem',
-                        paddingLeft: '6%'
+                        paddingLeft: '6%',
+                        fontSize: [overrideFontSize, "!important"]
                     }}
                 >
                     Rules
@@ -122,12 +124,14 @@ const RulesPage = () => {
                                 <CustomListItem sub={true}>Tier 1: 750-2999 BWS</CustomListItem>
                                 <CustomListItem sub={true}>Tier 2: 3000-7999 BWS</CustomListItem>
                                 <CustomListItem sub={true}>Tier 3: 8000-50000 BWS</CustomListItem>
-                                <CustomListItem sub={true}>BWS Formula: rank^(0.9937^(badges^2))</CustomListItem>
+                                <CustomListItem sub={true}><Typography variant='h3' noWrap={false} sx={{  display: 'inline' }}>BWS Formula: rank^(0.9937^(badges^2))
+                                </Typography>
+                                </CustomListItem>
                                 <CustomListItem sub={true}>
-                                    <span style={{ color: "#33cc33" }}>
+                                    <Typography variant='h3' sx={{ color: "#33cc33", display: 'inline' }}>
                                         No tier should have more than 2 players who meet its rank requirements. This means you can have exactly
                                         1-2 players of each tier, with a total team size of 3-6, whilst having one player in each tier.
-                                    </span>
+                                    </Typography>
                                 </CustomListItem>
                             </StyledList>
                         </CustomListItem>
