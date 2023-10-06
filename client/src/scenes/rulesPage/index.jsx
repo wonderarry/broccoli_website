@@ -116,7 +116,7 @@ const RulesPage = () => {
                             Broccoli Cup 3 is an <span style={{ color: "#33cc33" }}>international, 3v3, team size 3 to 6 tournament consisting of 3 different tiers.</span>
                         </CustomListItem>
                         <CustomListItem>
-                            These 3 different tiers have separate rank ranges.
+                            These 3 different tiers have separate rank ranges. 
                             <span style={{ color: "#33cc33" }}>A team must consist of at least 1 player from each tier.</span>
                             <StyledList>
                                 <CustomListItem sub={true}>Tier 1: 750-2999 BWS</CustomListItem>
@@ -206,7 +206,7 @@ const RulesPage = () => {
                             Qualifier rankings are determined with <span style={{ color: "#33cc33" }}>Z-Sum</span>.
                         </CustomListItem>
                         <CustomListItem>
-                            Only the <span style={{ color: "#33cc33" }}>top 64 ranked teams</span> will proceed to bracket stage.
+                            Only the <span style={{ color: "#33cc33" }}>top 32 ranked teams</span> will proceed to bracket stage.
                         </CustomListItem>
                     </StyledList>
                 </RuleButton>
