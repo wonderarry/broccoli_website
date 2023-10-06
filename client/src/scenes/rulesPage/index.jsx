@@ -171,13 +171,13 @@ const RulesPage = () => {
 
                         <StyledList>
                             <CustomListItem>
-                                <span style={{ color: "#F4E68B" }}>1st place:</span> Badge (pending) + Animated Banner
+                                <span style={{ color: "#e9cd16" }}>1st place:</span> Badge (pending) + Animated Banner
                             </CustomListItem>
                             <CustomListItem>
-                                <span style={{ color: "#C2CED1" }}>2nd place:</span> Animated Banner
+                                <span style={{ color: "#6e8a91" }}>2nd place:</span> Animated Banner
                             </CustomListItem>
                             <CustomListItem>
-                                <span style={{ color: "#C49C6E" }}>3rd place:</span> Animated Banner
+                                <span style={{ color: "#b5834a" }}>3rd place:</span> Animated Banner
                             </CustomListItem>
                         </StyledList>
                     </StyledList>
@@ -279,61 +279,55 @@ const RulesPage = () => {
                 <RuleButton title="Schedule">
                     <StyledList>
                         <CustomListItem>
-                            <span style={{ color: "#ea9999" }}>
+                            <span style={{ color: "#dc5656" }}>
                                 <b>Registrations:</b>
                             </span>{" "}
-                            Oct 3 - Sep Oct 16, 12 UTC
+                            Oct 6 - Sep Oct 20, 12 UTC
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#dd7e6b" }}>
+                            <span style={{ color: "#d04a2f" }}>
                                 <b>Screening:</b>
                             </span>{" "}
-                           Oct 16 - Oct 29
+                            Oct 20 - Nov 3
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#ffe599" }}>
+                            <span style={{ color: "#ffbf00" }}>
                                 <b>Qualifiers:</b>
                             </span>{" "}
-                            Oct 30 - Nov 5, 20 UTC
+                            Nov 10 - Nov 13, 18 UTC
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#b6d7a8" }}>
-                                <b>Round of 64:</b>
-                            </span>{" "}
-                            Nov 6 - Nov 12
-                        </CustomListItem>
-                        <CustomListItem>
-                            <span style={{ color: "#b6d7a8" }}>
+                            <span style={{ color: "#6daf50" }}>
                                 <b>Round of 32:</b>
                             </span>{" "}
-                            Nov 13 - Nov 19
+                            Nov 14 - Nov 20
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#b6d7a8" }}>
+                            <span style={{ color: "#6daf50" }}>
                                 <b>Round of 16:</b>
                             </span>{" "}
-                            Nov 20 - Nov 26
+                            Nov 21 - Nov 27
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#a2c4c9" }}>
+                            <span style={{ color: "#5d99a2" }}>
                                 <b>Quarterfinals:</b>
                             </span>{" "}
-                            Nov 27 - Dec 3
+                            Nov 28 - Dec 4
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#9fc5e8" }}>
+                            <span style={{ color: "#3282cd" }}>
                                 <b>Semifinals:</b>
                             </span>{" "}
-                            Dec 4 - Dec 10
+                            Dec 5 - Dec 11
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#b4a7d6" }}>
+                            <span style={{ color: "#6c52ad" }}>
                                 <b>Finals:</b>
                             </span>{" "}
-                            Dec 11 - Dec 17
+                            Dec 11 - Dec 18
                         </CustomListItem>
                         <CustomListItem>
-                            <span style={{ color: "#9fc5e8" }}>
+                            <span style={{ color: "#3282cd" }}>
                                 <b>Christmas Break:</b>
                             </span>{" "}
                             1-2 Weeks
