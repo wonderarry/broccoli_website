@@ -55,7 +55,7 @@ const Footer = () => {
                             Apply to staff
                         </FooterEntries>
                         <FooterEntries onTap={() => {
-                            window.location.href = 'https://www.google.com/search?q=forum+post&newwindow=1'
+                            window.location.href = 'https://osu.ppy.sh/community/forums/topics/1829892?n=1'
                         }}>Forum Post</FooterEntries>
                     </FooterSection>
 
