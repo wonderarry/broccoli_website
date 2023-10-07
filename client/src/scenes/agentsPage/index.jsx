@@ -5,7 +5,7 @@ import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
 import {useMediaQuery} from '@mui/material';
 const AgentsPage = () => {
-    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
+    const overrideFontSize = useMediaQuery("(min-width:800px)") ? 80 : 28;
     return (
         <PageWrapBox>
             <Box>

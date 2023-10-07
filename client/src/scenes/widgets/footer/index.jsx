@@ -82,7 +82,7 @@ const Footer = () => {
                     justifyContent='space-between'
                 >
                     <Box
-                        onClick={() => { window.location.href = 'https://www.google.com/search?q=discord&newwindow=1' }}
+                        onClick={() => { window.location.href = 'https://discord.gg/gqYdbYBRBN' }}
                         sx={{
                             borderRadius: '6px',
                             padding: '24px',
@@ -92,7 +92,7 @@ const Footer = () => {
                         <img src={discordMiniLogo} style={{ userSelect: 'none' }} />
                     </Box>
                     <Box
-                        onClick={() => { window.location.href = 'https://www.google.com/search?q=forum+post&newwindow=1' }}
+                        onClick={() => { window.location.href = 'https://osu.ppy.sh/community/forums/topics/1829892?n=1' }}
                         sx={{
                             borderRadius: '6px',
                             paddingY: '22px',

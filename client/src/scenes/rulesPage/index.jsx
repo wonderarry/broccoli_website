@@ -124,7 +124,7 @@ const RulesPage = () => {
                                 <CustomListItem sub={true}>Tier 1: 750-2999 BWS</CustomListItem>
                                 <CustomListItem sub={true}>Tier 2: 3000-7999 BWS</CustomListItem>
                                 <CustomListItem sub={true}>Tier 3: 8000-50000 BWS</CustomListItem>
-                                <CustomListItem sub={true}><Typography variant='h3' noWrap={false} sx={{  display: 'inline' }}>BWS Formula: rank^(0.9937^(badges^2))
+                                <CustomListItem sub={true}><Typography noWrap={false} sx={{  display: 'inline', fontSize: [18, '!important'] }}>BWS Formula: rank^(0.9937^(badges^2))
                                 </Typography>
                                 </CustomListItem>
                                 <CustomListItem sub={true}>
@@ -280,7 +280,7 @@ const RulesPage = () => {
                         </StyledList>
                     </StyledList>
                 </RuleButton>
-                <RuleButton title="Schedule">
+                <RuleButton title="Event Timeline">
                     <StyledList>
                         <CustomListItem>
                             <span style={{ color: "#dc5656" }}>
