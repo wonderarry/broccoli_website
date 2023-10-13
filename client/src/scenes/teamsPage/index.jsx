@@ -141,8 +141,8 @@ const TeamComponent = ({ data, onInteract, itemIndex }) => {
                             >
                                 <img src={avatarLink} style={{
                                     display: 'inline',
-                                    width: '25px',
-                                    height: '25px',
+                                    width: '30px',
+                                    height: '30px',
                                     borderRadius: '50%',
                                     marginRight: '0.7rem',
                                     marginLeft: '0.5rem'

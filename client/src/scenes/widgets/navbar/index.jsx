@@ -235,8 +235,8 @@ const Navbar = () => {
                         />
                     </FlexBetween>
                     <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/teams">Teams </CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/agents">Free Agents</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton  toWhere="/teams">Teams </CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton  toWhere="/agents">Free Agents</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/mappool">Mappool</CustomDesktopMenuButton>
                     {false &&
