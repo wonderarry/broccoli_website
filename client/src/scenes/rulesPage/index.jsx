@@ -286,7 +286,7 @@ const RulesPage = () => {
                             <span style={{ color: "#dc5656" }}>
                                 <b>Registrations:</b>
                             </span>{" "}
-                            Oct 6 - Sep Oct 20, 12 UTC
+                            Oct 6 - Oct 20, 12 UTC
                         </CustomListItem>
                         <CustomListItem>
                             <span style={{ color: "#d04a2f" }}>
