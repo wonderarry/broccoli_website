@@ -104,7 +104,7 @@ const RulesPage = () => {
                     variant='h1'
                     fontWeight='500'
                     sx={{
-                        paddingTop: '5%',
+                        paddingTop: '6%',
                         paddingBottom: '3rem',
                         paddingLeft: '6%',
                         fontSize: [overrideFontSize, "!important"]

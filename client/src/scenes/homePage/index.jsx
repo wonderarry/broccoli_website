@@ -29,7 +29,7 @@ const HomePage = () => {
                         variant='h1'
                         fontWeight='500'
                         sx={{
-                            paddingTop: '8%',
+                            paddingTop: '6%',
                             paddingBottom: '2rem',
                             fontSize: [overrideFontSize, "!important"]
                             

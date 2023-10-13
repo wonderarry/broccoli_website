@@ -11,7 +11,7 @@ import hexToRgba from "ulility/hexToRgba";
 
 
 
-const TextInput = ({ title, placeholder, validationType, initialValue, onChangeAction, overrideWidth=null }) => {
+const TextInput = ({ title, placeholder, validationType, initialValue, onChangeAction, overrideWidth = null, hideTitle = false }) => {
     // validationType denotes whether data is discordId or osuId
     const theme = useTheme();
     const [value, setValue] = useState(initialValue);
@@ -34,16 +34,16 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
         //console.log(event.key)
         //console.log(controlPressRef.current)
         if (!/[0-9]/.test(event.key) && event.key.length == 1) {
-            if  (
-                    !(
-                        controlPressRef.current &&
-                        (event.key == 'a' || event.key == 'c' || event.key == 'v')
-                    )
-                ){
-                    //console.log('event prevented')
-                    event.preventDefault();
-                }
-                
+            if (
+                !(
+                    controlPressRef.current &&
+                    (event.key == 'a' || event.key == 'c' || event.key == 'v')
+                )
+            ) {
+                //console.log('event prevented')
+                event.preventDefault();
+            }
+
         }
     }
 
@@ -75,7 +75,7 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
     }
 
     if (overrideWidth !== null) {
-        inputStyles = {...inputStyles, width: overrideWidth}
+        inputStyles = { ...inputStyles, width: overrideWidth }
     }
 
     return (
@@ -83,25 +83,26 @@ const TextInput = ({ title, placeholder, validationType, initialValue, onChangeA
             sx={{
                 display: 'column',
                 paddingBottom: '2.5rem',
-                
+
             }}
         >
-            <Typography
-                variant="h3"
-                color={titleColor}
-                fontWeight='500'
-                sx={{
-                    paddingBottom: '1rem'
-                }}
-            >
-                {title}
-            </Typography>
-
+            {!hideTitle &&
+                <Typography
+                    variant="h3"
+                    color={titleColor}
+                    fontWeight='500'
+                    sx={{
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    {title}
+                </Typography>
+            }
             <InputBase
                 placeholder={placeholder}
                 onChange={handleValueChange}
                 onKeyDown={
-                    validationType == 'osuId' ? osuInputValidation : (validationType === 'discordId' ? discordInputValidation : () => {return;})
+                    validationType == 'osuId' ? osuInputValidation : (validationType === 'discordId' ? discordInputValidation : () => { return; })
                 }
                 onKeyUp={
                     (event) => {

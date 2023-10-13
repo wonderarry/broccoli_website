@@ -292,8 +292,8 @@ const Navbar = () => {
                     <CustomMobileMenuButton toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/teams'>Teams</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/agents'>Agents</CustomMobileMenuButton>
+                    <CustomMobileMenuButton  toWhere='/teams'>Teams</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/bracket'>Bracket</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/mappool'>Mappool</CustomMobileMenuButton>
                     

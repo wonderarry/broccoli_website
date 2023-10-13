@@ -20,14 +20,16 @@ export const fetchCurrentPlayers = async () => {
     // console.log('players: ', requestData);
     for (let i = skipCount; i < requestData.length; i += 1) {
         const currentRow = requestData[i];
+        const badges = currentRow[15];
+        const bwsRank = currentRow[3] ** (0.9937 ** (badges ** 2));
         try {
             const newPlayer = new Player({
                 osuId: currentRow[0],
-                osuName: currentRow[18],
+                osuName: currentRow[1],
                 rankNoBWS: currentRow[3],
-                badgeCount: currentRow[15],
+                badgeCount: badges,
                 pp: currentRow[5],
-                rankWithBWS: currentRow[21]
+                rankWithBWS: bwsRank,
             })
             await newPlayer.save();
         }
@@ -48,11 +50,16 @@ export const fetchCurrentAgents = async () => {
 
     const requestData = rowsRequest.data.values;
     // console.log('agents: ', requestData);
-    //here we're hopping over odd rows due to the expected formatting of the sheet
+    //here we're NOT hopping over odd rows due to the expected formatting of the sheet
     try {
-        for (let i = 0; i < requestData.length; i += 2) {
+        for (let i = 0; i < requestData.length; i += 1) {
             try {
-                const currentName = requestData[i][0];
+                const currentRow = requestData[i];
+                console.log('i: ', i, ', currentRow: ', currentRow);
+                const currentName = currentRow[0];
+                const currentDiscord = currentRow[7];
+                const strengthsFlag = currentRow[10];
+
                 const potentialMatch = await Agent.findOne({ osuName: currentName });
                 if (potentialMatch === null) {
                     const existingRecord = await Player.findOne({ osuName: currentName });
@@ -62,7 +69,9 @@ export const fetchCurrentAgents = async () => {
                         rankNoBWS: existingRecord.rankNoBWS,
                         badgeCount: existingRecord.badgeCount,
                         pp: existingRecord.pp,
-                        rankWithBWS: existingRecord.rankWithBWS
+                        rankWithBWS: existingRecord.rankWithBWS,
+                        strengthsFlag: strengthsFlag,
+                        discordId: currentDiscord
                     });
                     await newAgent.save()
                 }
@@ -99,34 +108,32 @@ export const fetchCurrentTeams = async () => {
             const currentRow = requestData[i];
             try {
                 const teamName = currentRow[0];
-                const captainName = currentRow[4];
+                const leaderDiscord = currentRow.slice(55, 61)[0]; //BE to BJ, starting the count from B = 0
+                //we are assuming captainIndex to be 0 here, otherwise would be [captainIndex]
+                
+                const memberNames = currentRow.slice(4, 10);
+                console.log('memberNames: ', memberNames)
 
-                // in case we need to jump between cells
-                const memberNames = currentRow.slice(4, currentRow.length).filter((v, i) => {
-                    return i % 1 == 0;
-                })
-
-
-                const captainIndex = memberNames.findIndex((item) => {
-                    return item == captainName;
-                })
+                const teamMembers = await Promise.all(memberNames.map(async (playerId) => {
+                    const matchingPlayer = await Player.findOne({ osuId: playerId });
+                    if (matchingPlayer === null) {
+                        return null;
+                    }
+                    return {
+                        osuId: matchingPlayer.osuId,
+                        osuName: matchingPlayer.osuName,
+                        rankNoBWS: matchingPlayer.rankNoBWS,
+                        badgeCount: matchingPlayer.badgeCount,
+                        pp: matchingPlayer.pp,
+                        rankWithBWS: matchingPlayer.rankWithBWS
+                    }
+                }));
+                console.log('teamMembers: ', teamMembers);
                 const newTeam = new Team({
-                    members: await Promise.all(memberNames.map(async (username) => {
-                        const matchingPlayer = await Player.findOne({ osuName: username });
-                        if (matchingPlayer === null) {
-                            return null;
-                        }
-                        return {
-                            osuId: matchingPlayer.osuId,
-                            osuName: matchingPlayer.osuName,
-                            rankNoBWS: matchingPlayer.rankNoBWS,
-                            badgeCount: matchingPlayer.badgeCount,
-                            pp: matchingPlayer.pp,
-                            rankWithBWS: matchingPlayer.rankWithBWS
-                        }
-                    })),
-                    captainIndex: captainIndex,
-                    teamName: teamName
+                    members: teamMembers,
+                    captainIndex: 0,
+                    teamName: teamName,
+                    leaderDiscord: leaderDiscord
                 })
                 const requiredPadding = 6 - newTeam.members.length;
                 for (let i = 0; i < requiredPadding; i += 1) {

@@ -33,6 +33,16 @@ const AgentSchema = new mongoose.Schema({
         type: Number,
         required: true,
         unique: false,
+    },
+    strengthsFlag: {
+        type: Number, 
+        unique: false,
+        default: -1
+    },
+    discordId: {
+        type: String,
+        unique: false,
+        default: -1
     }
 });
 
@@ -58,6 +68,10 @@ const TeamSchema = new mongoose.Schema ({
     teamName: {
         type: String,
         required: true,
+    },
+    leaderDiscord: {
+        type: String, 
+        required: true
     }
 }, {timestamps: true});
 

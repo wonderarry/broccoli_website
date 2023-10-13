@@ -17,7 +17,7 @@ const RegisterNotification = ({ children, onClose, color="#000000", autoCloseTim
     useEffect(() => {
         if (isClosed) {
             setIsShown(false);
-            console.log('internally closed, 300ms delay until external trigger')
+            
             setTimeout(() => {
                 onClose();
             }, 300)
@@ -55,14 +55,15 @@ const RegisterNotification = ({ children, onClose, color="#000000", autoCloseTim
                 ...paperStyles,
                 position: 'fixed',
                 backgroundColor: '#f2f2f2',
-                zIndex: 100,
+                zIndex: 1000,
                 top: '5.5%',
+                borderRadius: '13px',
                 opacity: isShown ? 1 : 0,
                 transform: isShown ? 'translateY(0)' : 'translateY(-20px)',
                 transition: 'opacity 0.3s ease, transform 0.3s ease'
             }}
             elevation={2}
-            onClick={() => { console.log("clicked paper"); setIsClosed(true) }}
+            onClick={() => {  setIsClosed(true) }}
         >
             <Box
                 sx={{
@@ -76,7 +77,7 @@ const RegisterNotification = ({ children, onClose, color="#000000", autoCloseTim
             >
                 <Typography
                     variant='h4'
-                    fontWeight={400}
+                    fontWeight={500}
                     sx={{
                         color: color,
                         textAlign: 'center'

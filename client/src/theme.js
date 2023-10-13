@@ -84,35 +84,42 @@ export const themeSettings = (mode) => {
             h0: {
                 fontFamily: ['Poppins'].join(","),
                 fontSize: 50,
-                
+                fontWeight: 500
             },
             h1: {
                 fontFamily: ['Kica'].join(","),
                 fontSize: 80,
+                fontWeight: 500
             },
             h2: {
                 fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 32,
+                fontWeight: 500
             },
             h3: {
                 fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 24,
+                fontWeight: 500
             },
             h4: {
                 fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 20,
+                fontWeight: 500
             },
             h5: {
                 fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 18,
+                fontWeight: 500
             },
             h6: {
                 fontFamily: ["Poppins", 'Kica'].join(","),
                 fontSize: 14,
+                fontWeight: 500
             },
             watermark: {
                 fontFamily: ['Kica'].join(","),
-                fontSize: 16
+                fontSize: 16,
+                
             }
         }
     }
