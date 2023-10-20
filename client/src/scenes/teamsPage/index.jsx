@@ -170,7 +170,7 @@ const TeamComponent = ({ data, onInteract, itemIndex }) => {
                                             marginTop: '-0.3rem'
                                         }}
                                     >
-                                        {`#${Math.ceil(item.rankNoBWS).toLocaleString()}`}
+                                        {`#${Math.ceil(item.rankWithBWS).toLocaleString()}`}
                                     </Typography>
                                 </Box>
                                 {(index === captainIndex) &&
@@ -272,7 +272,7 @@ const TeamsPage = () => {
                         if (val === null) {
                             return acc;
                         }
-                        return acc + val.rankNoBWS;
+                        return acc + val.rankWithBWS;
                     }, 0) / data.members.filter((val) => { return val !== null }).length;
                     return { ...data, averageRank: Math.round((averageRank + Number.EPSILON) * 100) / 100 }
                 }).sort((a, b) => {
