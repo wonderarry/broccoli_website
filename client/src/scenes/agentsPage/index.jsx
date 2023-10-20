@@ -378,10 +378,10 @@ const AgentsPage = () => {
                     }} />
                     <MainButton
                         overridePalette={{
-                            bgColor: "#45ff45",
-                            bgColorAlt:  "#00bd00",
+                            bgColor: "#00ff80",
+                            bgColorAlt: "#00bd00",
                             textColor: "#000000",
-                            activeColor:  "#009900",
+                            activeColor: "#00aa00",
                         }}
                         onClickAction={() => navigate('/register/agent')}
                     >
@@ -424,7 +424,8 @@ const AgentsPage = () => {
                             alignSelf: 'center',
                             marginTop: '6rem',
                             opacity: (showNoMatch && !showLoadingPlaceholder) ? 0.5 : 0,
-                            transition: (showNoMatch && !showLoadingPlaceholder) ?'0.8s' : 0
+                            transition: (showNoMatch && !showLoadingPlaceholder) ?'0.8s' : 0,
+                            paddingBottom: '10vh'
                         }}
                     >
                         No matches found.

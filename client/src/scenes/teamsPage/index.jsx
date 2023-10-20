@@ -387,10 +387,10 @@ const TeamsPage = () => {
                     }} />
                     <MainButton
                         overridePalette={{
-                            bgColor: "#45ff45",
-                            bgColorAlt:  "#00bd00",
+                            bgColor: "#00ff80",
+                            bgColorAlt: "#00bd00",
                             textColor: "#000000",
-                            activeColor:  "#009900",
+                            activeColor: "#00aa00",
                         }}
                         onClickAction={() => navigate('/register/team')}
                     >
@@ -413,7 +413,7 @@ const TeamsPage = () => {
                         }}
                     >
                         <CustomSearchBar
-                            placeholder="Search for players"
+                            placeholder="Search for teams"
                             onChangeAction={setSearchQuery}
                         />
                     </Box>
@@ -424,7 +424,8 @@ const TeamsPage = () => {
                             sx={{
                                 alignSelf: 'center',
                                 marginTop: '6rem',
-                                color: '#888888'
+                                color: '#888888',
+                                paddingBottom: '10vh'
                             }}
                         >
                             Loading...
@@ -459,7 +460,8 @@ const TeamsPage = () => {
                             alignSelf: 'center',
                             marginTop: '6rem',
                             opacity: (dataState.isFetchAttemptComplete && (!dataState.isFetchAttemptSuccessful || dataState.teams.length == 0)) ? 0.5 : 0,
-                            transition: (dataState.isFetchAttemptComplete && (!dataState.isFetchAttemptSuccessful || dataState.teams.length == 0)) ? '0.8s' : 0
+                            transition: (dataState.isFetchAttemptComplete && (!dataState.isFetchAttemptSuccessful || dataState.teams.length == 0)) ? '0.8s' : 0,
+                            paddingBottom: '10vh'
                         }}
                     >
                         No matches found.

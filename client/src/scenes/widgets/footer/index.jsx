@@ -39,8 +39,14 @@ const Footer = () => {
 
                     <Box
                         onClick={() => { window.location.href = 'https://discord.gg/gqYdbYBRBN' }}
+                        sx={{
+                            transition: '0.5s',
+                            cursor: 'pointer'
+                        }}
                     >
-                        <img src={discordLogo} />
+                        <img 
+                            src={discordLogo}
+                        />
                     </Box>
                     {/* General - Home, Registers, Apply to staff, Forum post */}
                     <FooterSection title='General'>

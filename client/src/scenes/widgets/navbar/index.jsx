@@ -47,7 +47,7 @@ const CustomDesktopMenuButton = ({ children, toWhere, color = '#000000' }) => {
     )
 }
 
-const CustomMobileMenuButton = ({ children, toWhere, color='#1a1a1a' }) => {
+const CustomMobileMenuButton = ({ children, toWhere, color = '#1a1a1a' }) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const neutralDark = color;
@@ -199,11 +199,14 @@ const Navbar = () => {
                     <Box
                         onClick={() => navigate('/')}
                         sx={{
+                            '&:hover': {
+                                cursor: 'pointer'
+                            }
                         }}
                     >
-                        <img 
+                        <img
                             src={broccLogo}
-                            
+
                         />
 
                     </Box>
@@ -212,12 +215,19 @@ const Navbar = () => {
                 {/* If the device is not mobile, this gets shown */}
                 {isNonMobileScreens && <FlexBetween sx={{ flexBasis: "max(600px, 60%)" }}>
                     { /* Plan with the register button is to work on Typography's onClick event */}
+
+                    <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton toWhere="/agents">Free Agents</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/mappool">Mappool</CustomDesktopMenuButton>
                     <FlexBetween
                         onClick={() => setIsRegisterButton(!isRegisterButtonClicked)}
                         sx={{
                             marginRight: "-0.5rem",
                             color: neutralDark,
                             userSelect: 'none',
+                            color: '#8b8b8b',
                             "&:hover": {
                                 color: neutralMain,
                                 cursor: "pointer"
@@ -234,11 +244,6 @@ const Navbar = () => {
                             }}
                         />
                     </FlexBetween>
-                    <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton  toWhere="/teams">Teams </CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton  toWhere="/agents">Free Agents</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/mappool">Mappool</CustomDesktopMenuButton>
                     {false &&
                         <FlexBetween gap="2rem">
                             <IconButton onClick={() => dispatch(setMode())}>
@@ -289,14 +294,15 @@ const Navbar = () => {
                         zIndex: 20,
                     }}
                 >
-                    <CustomMobileMenuButton toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
-                    <CustomMobileMenuButton  toWhere='/teams'>Teams</CustomMobileMenuButton>
-                    <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/bracket'>Bracket</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'}toWhere='/mappool'>Mappool</CustomMobileMenuButton>
                     
+                    <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/teams'>Teams</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/bracket'>Bracket</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/mappool'>Mappool</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
+                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
+
                 </Box>
             )}
             {isNonMobileScreens && (

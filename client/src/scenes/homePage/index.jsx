@@ -32,7 +32,7 @@ const HomePage = () => {
                             paddingTop: '6%',
                             paddingBottom: '2rem',
                             fontSize: [overrideFontSize, "!important"]
-                            
+
                         }}
                     >
                         Broccoli cup 3
@@ -55,24 +55,24 @@ const HomePage = () => {
                     <Box
                     >
                         <MainButton
-                            onClickAction={() => navigate('/register/team')}
+                            onClickAction={() => navigate('/teams')}
                             overridePalette={{
-                                bgColor: "#32fa32",
-                                bgColorAlt:  "#00bd00",
+                                bgColor: "#00ff80",
+                                bgColorAlt: "#00bd00",
                                 textColor: "#000000",
-                                activeColor:  "#009900",
+                                activeColor: "#00aa00",
                             }}
                         >
-                            Team registration
+                            See registered teams
                         </MainButton>
                         <Box
                             width='1rem'
                             display={isNonMobileScreens ? 'inline-block' : 'block'}
                         ></Box>
                         <MainButton
-                            onClickAction={() => navigate('/register/agent')}
+                            onClickAction={() => navigate('/agents')}
                         >
-                            Agent registration
+                            See registered agents
                         </MainButton>
                         <Box
                             width='1rem'
@@ -84,7 +84,11 @@ const HomePage = () => {
                         >
                             Apply to staff
                         </TextButton>
-
+                        <Box
+                            height="5vh"
+                            width="100%"
+                        >
+                        </Box>
                     </Box>
                 </Box>
             </Box>
