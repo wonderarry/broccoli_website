@@ -50,7 +50,7 @@ await mongoose.connect(process.env.MONGO_URL, {
 
 /* CRON FETCH */
 //important todo: when data is being updated, notify the frontend that data is currently updated
-import { fetchCurrentPlayers, fetchCurrentAgents, fetchCurrentTeams } from "./controllers/fetch.js";
+import { fetchCurrentPlayers, fetchCurrentAgents, fetchCurrentTeams, fetchCurrentMaps, fetchCurrentMappools } from "./controllers/fetch.js";
 import cron from "node-cron";
 
 const fetchTask = cron.schedule('0 */4 * * *', async () => {
@@ -63,6 +63,10 @@ const fetchTask = cron.schedule('0 */4 * * *', async () => {
         console.log('Successfully fetched current agents')
         await fetchCurrentTeams();
         console.log('Successfully fetched current teams')
+        await fetchCurrentMaps();
+        console.log('Successfully fetched current maps')
+        await fetchCurrentMappools();
+        console.log('Successfully fetched current mappools')
         app.locals.isUpdating = false;
         console.log("Fetch complete!")
     }
@@ -82,10 +86,11 @@ fetchTask.start();
 import registerRoutes from "./routes/register.js";
 import agentsRoutes from "./routes/agents.js";
 import teamsRoutes from "./routes/teams.js";
+import mappoolRoutes from "./routes/mappool.js";
 
 app.use("/register", registerRoutes);
 app.use("/agents", agentsRoutes);
 app.use("/teams", teamsRoutes);
-
+app.use("/mappool", mappoolRoutes)
 
 
