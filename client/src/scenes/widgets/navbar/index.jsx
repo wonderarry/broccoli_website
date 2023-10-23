@@ -219,8 +219,9 @@ const Navbar = () => {
                     <CustomDesktopMenuButton toWhere="/rules">Rules</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/agents">Free Agents</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton toWhere="/mappool">Mappool</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/mappool">Mappool</CustomDesktopMenuButton>
+
                     <FlexBetween
                         onClick={() => setIsRegisterButton(!isRegisterButtonClicked)}
                         sx={{
@@ -294,12 +295,12 @@ const Navbar = () => {
                         zIndex: 20,
                     }}
                 >
-                    
+
                     <CustomMobileMenuButton toWhere='/rules'>Rules</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/teams'>Teams</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/mappool'>Mappool</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/bracket'>Bracket</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/mappool'>Mappool</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
 
