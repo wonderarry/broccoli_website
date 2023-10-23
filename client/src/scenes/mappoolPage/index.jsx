@@ -399,7 +399,7 @@ const MappoolPage = () => {
         console.log('activeMappool: ', activeMappool)
     })
     useEffect(() => {
-        axios.get('http://localhost:3001/mappool/')
+        axios.get('/api/mappool/')
             .then((res) => {
                 console.log(res)
                 setMappoolNames({
@@ -447,7 +447,7 @@ const MappoolPage = () => {
             mappoolId: -1,
             mappool: []
         })
-        axios.get('http://localhost:3001/mappool/stages/' + id)
+        axios.get('/api/mappool/stages/' + id)
             .then((res) => {
                 setActiveMappool({
                     mappoolId: id,
