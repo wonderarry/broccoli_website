@@ -20,7 +20,7 @@ const RegisterTeamPage = () => {
 
     const theme = useTheme();
 
-    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 28;
+    const overrideFontSize = useMediaQuery("(min-width:750px)") ? 80 : 50;
     const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
     const [teamName, setTeamName] = useState('');
     const [popupContent, setPopupContent] = useState({
@@ -221,26 +221,140 @@ const RegisterTeamPage = () => {
     return (
         <PageWrapBox>
             <Box>
+                {popupContent.isShown &&
+                    <RegisterNotification
+                        onClose={handleClosePopup}
+                        color={popupContent.color}
+                    >
+                        {popupContent.text}
+                    </RegisterNotification>
+                }
+
                 <Navbar />
+
                 <Box
-                    alignItems='center'
+                    marginLeft='6%'
                     display='flex'
-                    flexDirection='column'
-                    paddingTop='10%'
-                    paddingLeft='10%'
-                    paddingRight='10%'
+                    flexDirection="column"
+                    width={isNonMobileScreens ? "660px" : '88vw'}
+                    alignItems="flex-start"
                 >
                     <Typography
-                    variant='h1'
-                    color='black'
-                    fontWeight='500'
-                    textAlign='center'
-                    sx={{
-                        fontSize: [overrideFontSize, "!important"]
-                    }}
-                >
-                    The registrations are closed.
-                </Typography>
+                        variant='h1'
+                        fontWeight='500'
+                        sx={{
+                            paddingTop: '8%',
+                            paddingBottom: '3rem',
+                           
+                            fontSize: [overrideFontSize, "!important"]
+                            
+                        }}
+                    >
+                        Register as a team captain
+                    </Typography>
+                    <TextInput
+                        title="Team name"
+                        placeholder="Example name"
+                        validationType="any"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleTeamNameChange}
+                    />
+
+                    <TextInput
+                        title="Your osu! ID"
+                        placeholder="12345678"
+                        validationType="osuId"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleFormChange('osuId')}
+                    />
+                    <TextInput
+                        title="Your Discord"
+                        placeholder="Discord Tag"
+                        validationType="discordId"
+                        initialValue=""
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        onChangeAction={handleFormChange('discordId')}
+                    />
+                    {renderedList.map((item) => {
+                        return (
+                            <Box
+                                display='flex'
+                                flexDirection='row'
+                                key={item.id}
+                                sx={{
+
+                                    alignItems: 'center',
+                                }}
+                            >
+
+                                <RegisteringTeamMember
+                                    playerIndex={item.id}
+                                    onChangeOsuId={handleMemberOsuIdChange}
+                                    onChangeDiscordId={handleMemberDiscordIdChange}
+                                    onDeletePlayer={handleRemoveMember}
+                                    enumval={item.enumval}
+                                />
+                            </Box>)
+                    }
+                    )}
+
+                    <Box
+                        display='flex'
+                        flexDirection='row'
+                        onClick={handleAddMember}
+                        sx={{
+                            padding: '0.7rem 1.2rem',
+                            borderRadius: '6px',
+                            overflow: 'hidden',
+                            transform: (renderedList.length < 5) ? 'scaleY(1)' : 'scaleY(0)',
+                            opacity: (renderedList.length < 5) ? 1 : 0,
+                            width: isNonMobileScreens ? 'auto' : '88vw',
+                            justifyContent: 'center',
+                            border: '1px solid',
+                            borderColor: theme.palette.neutral.medium,
+                            transition: 'border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, opacity 0.6s ease-out',
+                            alignItems: 'center',
+                            marginBottom: '1.5rem',
+                            userSelect: 'none',
+                            '&:hover': {
+                                backgroundColor: theme.palette.neutral.veryLight,
+                                borderColor: theme.palette.neutral.darkMain,
+                            },
+                            '&:active': {
+                                backgroundColor: theme.palette.neutral.medium
+                            }
+                        }}
+                    >
+                        <AddBoxOutlined fontSize="medium" sx={{ color: 'black' }} />
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                paddingLeft: "0.5rem",
+                                paddingRight: '0.15rem',
+                                fontWeight: '600'
+                            }}
+                        >Add player</Typography>
+                    </Box>
+                    <MainButton
+                        onClickAction={handleSubmitForm}
+                        overrideWidth={!isNonMobileScreens ? '88vw' : null}
+                        overridePalette={{
+                            bgColor: isSubmitAvailable ? "#00ff80" : '#d4d4d4',
+                            bgColorAlt: isSubmitAvailable ? "#00bd00" : '#d4d4d4',
+                            textColor: isSubmitAvailable ? "#000000" : '#5c5c5c',
+                            activeColor: isSubmitAvailable ? "#009900" : '#d4d4d4',
+                        }}
+                        isClickable={isSubmitAvailable}
+                    >
+                        Register
+                    </MainButton>
+                    <Box
+                        height="20vh"
+                        width="100%"
+                    >
+                    </Box>
                 </Box>
             </Box>
             <Footer />
@@ -248,4 +362,4 @@ const RegisterTeamPage = () => {
     )
 }
 
-export default RegisterTeamPage
+export default RegisterTeamPage;

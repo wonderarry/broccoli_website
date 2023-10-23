@@ -55,24 +55,24 @@ const HomePage = () => {
                     <Box
                     >
                         <MainButton
-                            onClickAction={() => navigate('/teams')}
+                            onClickAction={() => navigate('/register/team')}
                             overridePalette={{
                                 bgColor: "#00ff80",
-                                bgColorAlt: "#00bd00",
+                                bgColorAlt:  "#00bd00",
                                 textColor: "#000000",
-                                activeColor: "#00aa00",
+                                activeColor:  "#009900",
                             }}
                         >
-                            See registered teams
+                            Team registration
                         </MainButton>
                         <Box
                             width='1rem'
                             display={isNonMobileScreens ? 'inline-block' : 'block'}
                         ></Box>
                         <MainButton
-                            onClickAction={() => navigate('/agents')}
+                            onClickAction={() => navigate('/register/agent')}
                         >
-                            See registered agents
+                            Agent registration
                         </MainButton>
                         <Box
                             width='1rem'
