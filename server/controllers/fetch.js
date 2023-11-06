@@ -174,6 +174,7 @@ export const fetchCurrentMaps = async () => {
             const currentRow = requestData[i];
             try {
                 const [beatmapid, modflag] = currentRow[0].split('|');
+                const beatmapsetid = currentRow[3];
                 const artist = currentRow[7];
                 const creator = currentRow[9];
                 const title = currentRow[22];
@@ -191,6 +192,7 @@ export const fetchCurrentMaps = async () => {
                 const update = {
                     $set: {
                         artist: artist,
+                        beatmapsetid: beatmapsetid,
                         title: title,
                         diffname: diffname,
                         starrating: starrating,

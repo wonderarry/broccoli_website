@@ -5,6 +5,9 @@ const OsuMapSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    beatmapsetid: {
+        type: Number
+    },
     artist: {
         type: String
     },
