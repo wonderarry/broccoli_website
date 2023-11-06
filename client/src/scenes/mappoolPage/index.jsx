@@ -92,7 +92,7 @@ const MappoolEntry = ({ data, onCopying }) => {
                 flexDirection: 'row',
             }}
         >
-            <img src={'https://b.ppy.sh/thumb/' + data.map.beatmapid + 'l.jpg'} style={{
+            <img src={'https://assets.ppy.sh/beatmaps/' + data.map.beatmapid + '/covers/list.jpg'} style={{
                 marginRight: isVerySmallScreen ? '0.4rem' : '1.1rem',
                 maxWidth: isVerySmallScreen ? '10%' : '20%',
                 transition: '0.3s',
