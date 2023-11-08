@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from 'scenes/widgets/navbar';
 import PageWrapBox from 'components/PageWrapBox';
 import Footer from 'scenes/widgets/footer';
+import MainButton from 'components/MainButton';
 import {
     useMediaQuery,
     Box,
@@ -94,7 +95,7 @@ const MappoolEntry = ({ data, onCopying }) => {
         >
             <img src={'https://assets.ppy.sh/beatmaps/' + data.map.beatmapsetid + '/covers/list.jpg'} style={{
                 marginRight: isVerySmallScreen ? '0.4rem' : '1.1rem',
-                maxWidth: isVerySmallScreen ? '10%' : '20%',
+                width: isVerySmallScreen ? '10%' : '20%',
                 transition: '0.3s',
                 objectFit: 'cover',
 
@@ -251,7 +252,7 @@ const MappoolEntry = ({ data, onCopying }) => {
                             position: 'relative',
                             opacity: isCopied ? '0' : '1',
                             transition: '0.3s',
-                            
+
                         }}
                     />
                     <img
@@ -261,7 +262,7 @@ const MappoolEntry = ({ data, onCopying }) => {
                             width: '20px',
                             height: '20px',
                             userSelect: 'none',
-                            
+
                             opacity: isCopied ? '1' : '0',
                             transform: isCopied ? 'translateY(0px)' : 'translateY(-20px)',
                             position: 'absolute',
@@ -365,6 +366,8 @@ const MappoolEntry = ({ data, onCopying }) => {
 const MappoolPage = () => {
     const overrideFontSize = useMediaQuery("(min-width:800px)") ? 60 : 50;
     const isVerySmallScreen = useMediaQuery("(max-width:400px)");
+    const [allLink, setAllLink] = useState(null);
+
     const [mappoolNames, setMappoolNames] = useState({
         names: [],
         isFetchAttemptComplete: false,
@@ -447,12 +450,27 @@ const MappoolPage = () => {
             mappoolId: -1,
             mappool: []
         })
+        setAllLink(null);
         axios.get('/api/mappool/stages/' + id)
             .then((res) => {
                 setActiveMappool({
                     mappoolId: id,
                     mappool: res.data
                 })
+                console.log(res.data)
+                if (res.data.downloadAllLink) {
+                    const fileIdRegex = /\/d\/([a-zA-Z0-9_-]+)/;
+                    const match = res.data.downloadAllLink.match(fileIdRegex);
+                    if (match) {
+                        const fileId = match[1];
+                        // Construct the direct download link
+                        const directDownloadLink = `https://drive.google.com/uc?id=${fileId}&export=download`;
+
+                        setAllLink(directDownloadLink);
+                    } else { //couldn't convert the link
+                        setAllLink(res.data.downloadAllLink)
+                    }
+                }
             })
             .catch((error) => {
                 console.error('Error fetching data: ', error);
@@ -526,11 +544,44 @@ const MappoolPage = () => {
                                     height: '2rem'
                                 }}
                             />
-                            <OrderedDropdownSelector
-                                data={mappoolNames.names}
-                                handleChangeSelection={handleChangeMappool}
-                                overrideSelect={mappoolNames.names.length - 1}
-                            />
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    alignItems: 'center'
+                                }}>
+                                <OrderedDropdownSelector
+                                    data={mappoolNames.names}
+                                    handleChangeSelection={handleChangeMappool}
+                                    overrideSelect={mappoolNames.names.length - 1}
+                                />
+                                <Box
+                                    sx={{
+                                        paddingLeft: '6rem',
+                                    }}
+                                />
+                                {allLink &&
+                                    <Box
+                                        sx={{
+                                            paddingRight: isVerySmallScreen ? '2rem' : '4rem'
+                                        }}
+                                    >
+
+                                        <MainButton
+                                            onClickAction={() => window.location.href = allLink}
+                                            overridePalette={{
+                                                bgColor: "#00ff80",
+                                                bgColorAlt: "#00bd00",
+                                                textColor: "#000000",
+                                                activeColor: "#00aa00",
+                                            }}
+                                        >
+                                            Download Mappack
+                                        </MainButton>
+                                    </Box>
+                                }
+                            </Box>
                         </Box>
                     }
                     {(activeMappool.mappoolId !== -1) &&

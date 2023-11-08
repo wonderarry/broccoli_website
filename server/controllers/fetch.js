@@ -247,6 +247,15 @@ export const fetchCurrentMappools = async () => {
                 range: getExtraRange(worksheet)
             })
             const mappoolName = extraRequest.data.values[0][0]; // this one includes the display name for the mappool
+            // if there is a link to the file on google drive that has all the maps, this one will have it
+            let mappoolAllLink = null;
+            if (extraRequest.data.values[0].length >= 4){
+                const potentialLink = extraRequest.data.values[0][3];
+                if (potentialLink.length > 1){
+                    mappoolAllLink = potentialLink;
+                }
+            }
+
             const mainData = mainRequest.data.values; // this holds the ids for the map and where they belong (nm3 for example)
             console.log(mainData)
             try {
@@ -264,12 +273,26 @@ export const fetchCurrentMappools = async () => {
                         map: await OsuMap.findOne({ beatmapid: mapId })
                     })
                 }
-                const update = {
-                    $set: {
-                        order: i,
-                        entries: entryArray
+                // if there is a link present, it will be added to the database. otherwise we just don't add it
+                let update;
+                if (mappoolAllLink !== null){
+                    update = {
+                        $set: {
+                            order: i,
+                            downloadAllLink: mappoolAllLink,
+                            entries: entryArray
+                        }
                     }
                 }
+                else {
+                    update = {
+                        $set: {
+                            order: i,
+                            entries: entryArray
+                        }
+                    }
+                }
+                
                 await Mappool.findOneAndUpdate(filter, update, { new: true, upsert: true });
                 i += 1;
             }

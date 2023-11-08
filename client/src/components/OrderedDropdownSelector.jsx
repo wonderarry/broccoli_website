@@ -21,14 +21,25 @@ const OrderedDropdownSelector = ({ data, overrideSelect = 0, handleChangeSelecti
     }, [])
 
     return (
-        <Box>
+        <Box
+            tabIndex={0}
+            onBlur={() => setIsOpened(false)}
+            sx={{
+                '&:focus': {
+                    outline: 'none', // Remove the focus outline
+                    border: 'none',  // Remove the border
+                  },
+            }}
+            >
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    paddingBottom: '1.5rem'
+                    paddingBottom: '1.5rem',
+                    
                 }}
-                onClick={() => {setIsOpened(!isOpened)}}
+                onClick={() => { setIsOpened(!isOpened) }}
+
             >
                 <Typography
                     variant='h2'
@@ -40,7 +51,7 @@ const OrderedDropdownSelector = ({ data, overrideSelect = 0, handleChangeSelecti
                 <img src={ArrowDown} style={{
                     transform: !isOpened ? 'rotate(0)' : 'rotate(-180deg)',
                     transition: '0.4s'
-                }}/>
+                }} />
             </Box>
 
             <Box
@@ -54,6 +65,7 @@ const OrderedDropdownSelector = ({ data, overrideSelect = 0, handleChangeSelecti
                     boxShadow: isOpened ? '0px 5px 10px rgba(0, 0, 0, 0.2)' : 0,
                     backgroundColor: '#ffffff'
                 }}
+
             >
                 {data.sort((a, b) => {
                     return a.order - b.order;

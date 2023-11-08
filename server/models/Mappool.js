@@ -58,6 +58,7 @@ const MappoolEntrySchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
+    
     map: OsuMapSchema
 })
 
@@ -70,6 +71,10 @@ const MappoolSchema = new mongoose.Schema({
     order: {
         type: Number, 
         required: true,
+    },
+    downloadAllLink: {
+        type: String,
+        required: false
     },
     entries: [MappoolEntrySchema]
 })
