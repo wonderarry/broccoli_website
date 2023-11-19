@@ -220,7 +220,7 @@ const Navbar = () => {
                     <CustomDesktopMenuButton toWhere="/teams">Teams </CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/agents">Free Agents</CustomDesktopMenuButton>
                     <CustomDesktopMenuButton toWhere="/mappool">Mappool</CustomDesktopMenuButton>
-                    <CustomDesktopMenuButton color={'#8b8b8b'} toWhere="/bracket">Bracket</CustomDesktopMenuButton>
+                    <CustomDesktopMenuButton toWhere="/bracket">Bracket</CustomDesktopMenuButton>
 
                     <FlexBetween
                         onClick={() => setIsRegisterButton(!isRegisterButtonClicked)}
@@ -300,7 +300,7 @@ const Navbar = () => {
                     <CustomMobileMenuButton toWhere='/teams'>Teams</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/agents'>Agents</CustomMobileMenuButton>
                     <CustomMobileMenuButton toWhere='/mappool'>Mappool</CustomMobileMenuButton>
-                    <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/bracket'>Bracket</CustomMobileMenuButton>
+                    <CustomMobileMenuButton toWhere='/bracket'>Bracket</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/agent'>Agent Registration</CustomMobileMenuButton>
                     <CustomMobileMenuButton color={'#8b8b8b'} toWhere='/register/team'>Team Registration</CustomMobileMenuButton>
 
