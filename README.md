@@ -53,3 +53,6 @@ Same goes for the following:
 You will need a service account in order to actually run this system in sync with the spreadsheet. You have to specify the following related env variables:
 - **SERVICE_ACCOUNT_CLIENT_EMAIL** is the email that could be found in the credentials file as well as on the Google Cloud Console.
 - **SERVICE_ACCOUNT_PRIVATE_KEY** - look for it in the credentials file, it's the big string that begins with **-----BEGIN PRIVATE KEY----**
+
+## Contributing
+This project is not currently being updated.
